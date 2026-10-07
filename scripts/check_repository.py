@@ -10,7 +10,7 @@ from pathlib import Path
 from urllib.parse import unquote, urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
-SKIP = {'.git', '__pycache__', 'build', 'dist', '.venv', 'venv'}
+SKIP = {'.git', '__pycache__', 'build', 'dist', '.venv', 'venv', '.DS_Store', 'Thumbs.db'}
 
 
 def main():
