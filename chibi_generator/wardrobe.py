@@ -9,8 +9,9 @@ interpolate=clothing.interpolate
 COLORS={'black':(.014,.013,.022),'charcoal':(.035,.039,.050),'burgundy':(.19,.018,.043),'pink':(.65,.23,.40),'lilac':(.36,.18,.52),'cyan':(.04,.46,.52),'acid':(.25,.80,.045),'ivory':(.72,.65,.57),'denim':(.025,.040,.065),'blue':(.075,.16,.26),'olive':(.105,.115,.055),'moss':(.10,.20,.14),'brown':(.12,.065,.043),'mustard':(.48,.28,.055),'gold':(.52,.32,.09),'silver':(.55,.59,.66),'skin':(.66,.36,.265)}
 PALETTE={'black':('black','silver'),'burgundy':('burgundy','black'),'pastel':('pink','lilac'),'neon':('black','acid'),'earthy':('moss','brown')}
 
-def material(name,color,accent=None,pattern=None,rough=.75,metal=0):
-    col=COLORS.get(color,color);m=clothing.fabric(name,col,rough,metal)
+def material(name,color,accent=None,pattern=None,rough=None,metal=0,surface=None):
+    surface=surface or ('skin' if color=='skin' and not pattern else 'cloth')
+    col=COLORS.get(color,color);m=clothing.fabric(name,col,rough,metal,surface)
     if not pattern:return m
     alt=COLORS.get(accent or 'ivory',accent);nodes=m.node_tree.nodes;links=m.node_tree.links
     tex=nodes.new('ShaderNodeTexCoord');xyz=nodes.new('ShaderNodeSeparateXYZ');links.new(tex.outputs['Object'],xyz.inputs[0])
@@ -47,8 +48,7 @@ class Builder:
         self.col=col;self.rig=rig;self.slot=slot;self.key=key;self.cfg=dict(model.ASSETS[slot][key]);self.objects=[]
         cfg=self.cfg;color=cfg.get('color','black');accent=cfg.get('accent','lilac')
         if palette in PALETTE:color,accent=PALETTE[palette]
-        self.main=material(key+' • fabric',color,accent,None if cfg['builder']=='layered' else cfg.get('pattern'),.26 if cfg.get('vinyl') else .38 if cfg.get('leather') else .87 if cfg.get('velvet') else .75)
-        if cfg.get('velvet'):self.main.node_tree.nodes.get('Principled BSDF').inputs['Sheen Weight'].default_value=.45
+        self.main=material(key+' • fabric',color,accent,None if cfg['builder']=='layered' else cfg.get('pattern'),surface=cfg.get('surface','cloth'))
         self.accent=material(key+' • accent',accent);self.dark=material(key+' • piping','black');self.light=material(key+' • lining','ivory');self.silver=material(key+' • hardware','silver',rough=.28,metal=.8)
     def obj(self,mesh,name,mat=None,part=None,smooth=True):
         part=part or ('skirt' if self.slot=='bottom' else 'leg' if self.slot=='shoes' else 'body')
@@ -235,7 +235,7 @@ class Builder:
             self.panel('bow ribbon',[(x+side*.007,y,z),(x+side*size*.45,y,z-size*1.20),(x+side*size*.15,y,z-size*1.05)],self.accent,part)
         self.tube('bow knot',[(x,y-.005,z-.006),(x,y-.005,z+.006)],.007,self.dark,part)
     def build_shoe(self):
-        c=self.cfg;plat=c['platform'];height=c['height'];sole=material(self.key+' • sole','charcoal',rough=.8)
+        c=self.cfg;plat=c['platform'];height=c['height'];sole=material(self.key+' • sole','charcoal',rough=.8,surface='rubber')
         for side in (-1,1):
             x=side*.105
             self.surface('platform sole',[(x,-.049,.018,.064,.111),(x,-.049,.027,.075,.125),(x,-.049,plat,.075,.125),(x,-.049,plat+.008,.072,.122)],sole,'leg',caps=True)
@@ -372,6 +372,8 @@ def visibility(objects,spec):
     outfit=spec['outfit'];dress=outfit['dress']!='none';palette=outfit['palette'];shoeheight=model.ASSETS['shoes'][outfit['shoes']].get('height',.34 if outfit['shoes']=='boots' else .22);fit='tucked' if shoeheight>.30 else 'loose'
     for ob in objects:
         slot=ob.get('chibi_slot');hidden=False
+        if not (slot or ob.get('chibi_accessory') or ob.get('chibi_replaced_legs') or ob.get('chibi_retired_detail') or ob.get('chibi_underbody')):
+            continue
         if slot:
             hidden=(dress and slot in ('top','bottom')) or (not dress and slot=='dress') or (outfit.get(slot)!=ob.get('chibi_option'))
             if ob.get('chibi_factory_v2'):

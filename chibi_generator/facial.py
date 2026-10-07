@@ -106,6 +106,13 @@ def own_materials(objects):
                 if original.name not in owned:owned[original.name]=original.copy()
                 slot.material=owned[original.name]
 
+def visibility(objects,spec):
+    """Cosmetic layers own their visibility, independently from wardrobe caches."""
+    hidden=spec['makeup']['freckles']<=.001
+    for ob in objects:
+        if ob.get('chibi_asset')=='Freckle colour layer':
+            ob.hide_render=hidden;ob.hide_viewport=hidden
+
 def paint(ob,points,spec):
     face=spec['face'];cosmetics=spec['makeup'];name=ob['chibi_asset'];preset=model.MAKEUP_PRESETS[cosmetics['preset']]
     _,shadow,shadow_strength,blush,blush_strength,lip,lip_strength,wing,freckles=preset

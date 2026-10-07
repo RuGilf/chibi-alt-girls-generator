@@ -2,11 +2,11 @@
 
 A modular Blender add-on for creating adult chibi characters in alternative fashion. Build a character manually or randomize body proportions, face, makeup, hair, skin, clothing, accessories, standing poses and hand gestures.
 
-[Русский](README.md) · [Download add-on 0.8.0](releases/chibi_generator_v0.8.0.zip) · [Gallery](docs/GALLERY.md)
+[Русский](README.md) · [Download add-on 0.8.1](releases/chibi_generator_v0.8.1.zip) · [Gallery](docs/GALLERY.md)
 
 ![Character examples rendered in Blender](docs/images/characters.jpg)
 
-**Version 0.8.0. Tested with Blender 5.2.2 LTS on macOS. The add-on UI is currently in Russian.** Generation runs locally using the bundled geometry and procedural materials. No AI model, account, external asset service or additional Python package installation is required to use the add-on.
+**Version 0.8.1. Tested with Blender 5.2.2 LTS on macOS. The add-on UI is currently in Russian.** Generation runs locally using the bundled geometry and procedural materials. No AI model, account, external asset service or additional Python package installation is required to use the add-on.
 
 ## Features
 
@@ -22,13 +22,21 @@ A modular Blender add-on for creating adult chibi characters in alternative fash
 
 ## Installation
 
-1. Download the [add-on ZIP](releases/chibi_generator_v0.8.0.zip); keep it zipped.
+1. Download the [add-on ZIP](releases/chibi_generator_v0.8.1.zip); keep it zipped.
 2. In Blender, open **Edit → Preferences → Add-ons**.
 3. Use the upper-right menu → **Install from Disk…** and select the ZIP.
 4. Enable **CHIBI CHARACTER GENERATOR**.
 5. In the 3D Viewport, press **N**, open **АЛЬТУШКА**, then click **Случайная альтушка** to generate a character.
 
 See the [official Blender add-on installation guide](https://docs.blender.org/manual/en/latest/editors/preferences/addons.html). This is a conventional ZIP add-on, not a Blender Extensions manifest package. Other Blender versions and Windows/Linux have not been tested. The 4.2 minimum declared in `bl_info` is not a verified compatibility promise for the bundled `.blend` assets.
+
+## Materials in 0.8.1
+
+Distinct procedural knit, denim, leather, vinyl and velvet surfaces; fine relief uses neutral mesh coordinates to stay attached during body and pose changes. Colors and patterns are preserved. No texture downloads are needed.
+
+![Material studies rendered in Blender](docs/images/materials-0.8.1.jpg)
+
+This patch also fixes generation after File > New, cosmetic visibility, pose resets during seeded regeneration, and camera setup after JSON loading.
 
 ## Basic workflow
 

@@ -18,7 +18,7 @@ def tint_material(rig):
     name='Hair tint • '+rig['chibi_character_id']
     m=bpy.data.materials.get(name)
     if m:return m
-    m=clothing.fabric(name,(.021,.017,.039),.36)
+    m=clothing.fabric(name,(.021,.017,.039),.36,surface='hair')
     # Clean polished locks; fabric bump would look like rough felt.
     bs=m.node_tree.nodes.get('Principled BSDF')
     for link in list(m.node_tree.links):

@@ -199,7 +199,7 @@ def sample_body(seed,curvature_probability=CURVATURE_CHANCE):
 def generate_spec(seed=None,curvature_probability=CURVATURE_CHANCE,style=None,style_mix=None):
     if seed is None:seed=secrets.randbelow(2**31)
     style=validate_style(style_mix if style_mix is not None else ({style:1} if style else {}))
-    return {'schema_version':1,'generator_version':'0.8','seed':seed,'age':25,'curvature_probability':curvature_probability,'body':sample_body(seed,curvature_probability),'appearance':'approved_orchid_bob_v1','face':sample_face(seed),'makeup':sample_style_makeup(seed,style),'outfit':sample_outfit(seed,style),'accessories':sample_accessories(seed,style),'style':style,'hair':sample_hair(seed,style),'skin':sample_skin(seed),'pose':default_pose()}
+    return {'schema_version':1,'generator_version':'0.8.1','seed':seed,'age':25,'curvature_probability':curvature_probability,'body':sample_body(seed,curvature_probability),'appearance':'approved_orchid_bob_v1','face':sample_face(seed),'makeup':sample_style_makeup(seed,style),'outfit':sample_outfit(seed,style),'accessories':sample_accessories(seed,style),'style':style,'hair':sample_hair(seed,style),'skin':sample_skin(seed),'pose':default_pose()}
 
 def validate(spec):
     if not isinstance(spec,dict) or spec.get('schema_version')!=1:raise ValueError('Unsupported chibi preset version')
@@ -277,7 +277,7 @@ def randomize_spec(spec,seed=None,locked=()):
     fresh=generate_spec(seed,out['curvature_probability'],style_mix=out['style'])
     for group in GROUPS:
         if group not in locked:out[group]=fresh[group];out[group+'_seed']=fresh['seed']
-    out['seed']=fresh['seed'];out['generator_version']='0.8';return validate(out)
+    out['seed']=fresh['seed'];out['generator_version']='0.8.1';return validate(out)
 
 
 POSE_PRESETS=json.loads((Path(__file__).parent/'config/poses.json').read_text(encoding='utf8'))['presets']

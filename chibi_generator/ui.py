@@ -217,8 +217,11 @@ class CHIBI_OT_regenerate(bpy.types.Operator):
     def execute(self,context):
         s=context.scene.chibi_settings;c=current(context)
         try:
-            if c:remember(c);c.apply(model.generate_spec(s.seed,s.curve_chance/100,style_mix=c.parameters['style']));focus(context,c)
+            if c:
+                remember(c);spec=model.generate_spec(s.seed,s.curve_chance/100,style_mix=c.parameters['style'])
+                spec['pose']=c.parameters['pose'];c.apply(spec);focus(context,c)
             else:c=focus(context,scene.generate_character(s.seed,s.curve_chance/100,style_mix=selected_style(s)))
+            studio.set_view(context,c,context.scene.get('chibi_view','hero'))
         except Exception as e:self.report({'ERROR'},str(e));return {'CANCELLED'}
         return {'FINISHED'}
 
@@ -372,6 +375,7 @@ class CHIBI_OT_load(bpy.types.Operator,ImportHelper):
             if c:remember(c);c.apply(spec)
             else:c=scene.generate_character(spec=spec)
             focus(context,c);context.scene.chibi_settings.seed=c.parameters['seed']
+            studio.set_view(context,c,context.scene.get('chibi_view','hero'))
         except Exception as e:self.report({'ERROR'},str(e));return {'CANCELLED'}
         return {'FINISHED'}
 class CHIBI_OT_save_scene(CharacterOperator,bpy.types.Operator,ExportHelper):

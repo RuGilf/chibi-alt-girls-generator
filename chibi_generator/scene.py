@@ -3,7 +3,7 @@ import json, math, uuid
 from pathlib import Path
 import bpy,numpy as np
 from mathutils import Vector,Matrix
-from . import model,facial,clothing,wardrobe,hair,appearance,hands,posing
+from . import model,facial,clothing,wardrobe,hair,appearance,hands,posing,surfaces
 from .deformation import deform
 ASSET=Path(__file__).resolve().parent/'assets/chibi_base.blend'
 SECTIONS=('01 Body','02 Face','03 Hair','04 Outfit','05 Jewelry')
@@ -29,6 +29,12 @@ def bone_specs():
 BONES=bone_specs()
 
 def templates():
+    # File > New, opening a scene and Undo can invalidate cached Blender IDs.
+    try:
+        if any(bpy.data.objects.get(ob.name) != ob or ob.data is None for _, ob in _CACHE):
+            _CACHE.clear()
+    except ReferenceError:
+        _CACHE.clear()
     if not _CACHE:
         if bpy.data.filepath and Path(bpy.data.filepath).resolve()==ASSET.resolve():
             collections=[bpy.data.collections.get(s) for s in SECTIONS]
@@ -161,7 +167,8 @@ class Character:
             ob.shape_key_add(name='Basis');ob.shape_key_add(name='BodyVariation');bind(ob,self.rig,ob['chibi_part'])
         for ob in hair.ensure(self.collection,self.rig,spec):
             ob.shape_key_add(name='Basis');ob.shape_key_add(name='BodyVariation');bind(ob,self.rig,'head')
-        wardrobe.visibility(self.objects,spec);hair.visibility(self.objects,spec);hands.visibility(self.objects);wardrobe.legwear(self.objects,self.rig,spec['outfit']['legwear']);appearance.apply_materials(self.objects,self.rig,spec)
+        wardrobe.visibility(self.objects,spec);hair.visibility(self.objects,spec);hands.visibility(self.objects);facial.visibility(self.objects,spec);wardrobe.legwear(self.objects,self.rig,spec['outfit']['legwear']);appearance.apply_materials(self.objects,self.rig,spec)
+        surfaces.upgrade_cached(self.objects,model.ASSETS)
         for ob in self.objects:
             if ob.type!='MESH' or ob.hide_render:continue
             if refine_garment(ob):
