@@ -1,0 +1,74 @@
+{
+  "accessories": [
+    "earring",
+    "waistchain"
+  ],
+  "age": 25,
+  "appearance": "approved_orchid_bob_v1",
+  "body": {
+    "breast_size": 0.5,
+    "calf_size": 0.5,
+    "curve_direction": -1,
+    "curve_severity": 0,
+    "glute_size": 0.5,
+    "height": 0.56,
+    "leg_asymmetry": -0.025652186910287315,
+    "shoulder_tilt": -0.009202851353157236,
+    "thigh_size": 0.55
+  },
+  "curvature_probability": 0.04,
+  "face": {
+    "brow_arch": -0.2,
+    "brow_height": -0.08,
+    "cheeks": -0.2,
+    "chin": 0.2,
+    "expression": "cheerful",
+    "eye_color": "amber",
+    "eye_size": 0.96,
+    "eye_spacing": 0.1,
+    "eye_tilt": -0.08,
+    "jaw": 0.75,
+    "lip_fullness": -0.12,
+    "mouth_width": 0.3,
+    "nose_projection": 0.2,
+    "nose_width": 0.4,
+    "preset": "soft_square",
+    "width": 0.15
+  },
+  "generator_version": "0.9.0",
+  "hair": {
+    "color": "copper",
+    "pattern": "dipped",
+    "preset": "shag",
+    "secondary": "honey"
+  },
+  "makeup": {
+    "freckles": 0.75,
+    "intensity": 1.0,
+    "preset": "freckles"
+  },
+  "outfit": {
+    "bottom": "baggyjeans",
+    "dress": "none",
+    "legwear": "bare",
+    "palette": "default",
+    "shoes": "sneakers",
+    "top": "flannel"
+  },
+  "pose": {
+    "left": "auto",
+    "mirror": false,
+    "preset": "weight_shift",
+    "right": "auto"
+  },
+  "schema_version": 1,
+  "seed": 9102,
+  "skin": {
+    "preset": "olive",
+    "shade": 0,
+    "undertone": 0
+  },
+  "style": {
+    "grunge": 1.0
+  }
+}

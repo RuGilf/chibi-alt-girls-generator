@@ -155,6 +155,7 @@ class Character:
             facial.own_materials(self.objects)
             extras=facial.extra_assets(self.collection,self.rig);bpy.context.view_layer.update()
             for ob in extras:bind(ob,self.rig,'head')
+        facial.detail_materials(self.objects,self.rig)
         if not self.rig.get('chibi_wardrobe_v1'):
             clothing.tag_original(self.objects)
             for ob in clothing.create(self.collection,self.rig):
@@ -165,6 +166,8 @@ class Character:
         wardrobe.tag_original(self.objects)
         for ob in wardrobe.ensure(self.collection,self.rig,spec):
             ob.shape_key_add(name='Basis');ob.shape_key_add(name='BodyVariation');bind(ob,self.rig,ob['chibi_part'])
+        for ob in self.objects:
+            if ob.get('chibi_asset','').startswith('Underlying arm'):hands.bind_wrist(ob,rest_points(ob))
         for ob in hair.ensure(self.collection,self.rig,spec):
             ob.shape_key_add(name='Basis');ob.shape_key_add(name='BodyVariation');bind(ob,self.rig,'head')
         wardrobe.visibility(self.objects,spec);hair.visibility(self.objects,spec);hands.visibility(self.objects);facial.visibility(self.objects,spec);wardrobe.legwear(self.objects,self.rig,spec['outfit']['legwear']);appearance.apply_materials(self.objects,self.rig,spec)

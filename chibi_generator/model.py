@@ -142,8 +142,15 @@ MAKEUP_PRESETS={
  'freckles':('Freckles',(.42,.22,.12),.08,(.84,.22,.14),.26,(.49,.16,.12),.26,.45,1),
 }
 EYE_COLORS={'violet':(.49,.14,.65),'blue':(.055,.29,.62),'jade':(.045,.42,.25),'amber':(.60,.28,.035),'brown':(.23,.10,.045),'rose':(.58,.10,.28)}
-EXPRESSIONS=('calm','cheerful','serious','dreamy')
-FACE_LIMITS={'width':(-1,1),'jaw':(-1,1),'cheeks':(-1,1),'chin':(-1,1),'eye_size':(.86,1.14),'eye_spacing':(-1,1),'eye_tilt':(-1,1)}
+EXPRESSIONS=('calm','cheerful','serious','dreamy','wink')
+FACE_DETAIL_DEFAULTS=dict(nose_width=0.,nose_projection=0.,mouth_width=0.,lip_fullness=0.,brow_height=0.,brow_arch=0.)
+FACE_DETAILS={
+ 'classic':(0,0,0,0,0,0), 'round':(-.25,-.20,.10,.40,.18,-.20),
+ 'oval':(-.20,.32,-.05,.05,.10,.35), 'heart':(-.12,.08,.22,.30,.16,.28),
+ 'soft_square':(.40,.20,.30,-.12,-.08,-.20), 'elfin':(-.35,.25,-.20,.12,.22,.50)}
+for _key,_values in FACE_DETAILS.items():
+    FACE_PRESETS[_key][1].update(dict(zip(FACE_DETAIL_DEFAULTS,_values)))
+FACE_LIMITS={'width':(-1,1),'jaw':(-1,1),'cheeks':(-1,1),'chin':(-1,1),'eye_size':(.86,1.14),'eye_spacing':(-1,1),'eye_tilt':(-1,1),**{k:(-1,1) for k in FACE_DETAIL_DEFAULTS}}
 
 def default_face():
     return dict(FACE_PRESETS['classic'][1],preset='classic',expression='calm',eye_color='violet')
@@ -155,8 +162,12 @@ def group_rng(seed,group):
 def sample_face(seed):
     r=group_rng(seed,'Face');name=r.choice(list(FACE_PRESETS));out=dict(FACE_PRESETS[name][1])
     for k in FACE_LIMITS:
+        if k in FACE_DETAIL_DEFAULTS:continue
         lo,hi=FACE_LIMITS[k];out[k]=max(lo,min(hi,out[k]+r.uniform(-.055,.055)))
-    return dict(out,preset=name,expression=r.choice(EXPRESSIONS),eye_color=r.choice(list(EYE_COLORS)))
+    # Keep old seeded eye colors and expressions stable; new details have their own stream.
+    expression=r.choice(EXPRESSIONS[:4]);eye_color=r.choice(list(EYE_COLORS));detail=group_rng(seed,'FaceDetails')
+    for k in FACE_DETAIL_DEFAULTS:out[k]=max(-1,min(1,out[k]+detail.uniform(-.18,.18)))
+    return dict(out,preset=name,expression=expression,eye_color=eye_color)
 def sample_makeup(seed):
     r=group_rng(seed,'Makeup');name=r.choice(list(MAKEUP_PRESETS))
     return dict(preset=name,intensity=r.uniform(.82,1),freckles=MAKEUP_PRESETS[name][-1])
@@ -199,7 +210,7 @@ def sample_body(seed,curvature_probability=CURVATURE_CHANCE):
 def generate_spec(seed=None,curvature_probability=CURVATURE_CHANCE,style=None,style_mix=None):
     if seed is None:seed=secrets.randbelow(2**31)
     style=validate_style(style_mix if style_mix is not None else ({style:1} if style else {}))
-    return {'schema_version':1,'generator_version':'0.8.1','seed':seed,'age':25,'curvature_probability':curvature_probability,'body':sample_body(seed,curvature_probability),'appearance':'approved_orchid_bob_v1','face':sample_face(seed),'makeup':sample_style_makeup(seed,style),'outfit':sample_outfit(seed,style),'accessories':sample_accessories(seed,style),'style':style,'hair':sample_hair(seed,style),'skin':sample_skin(seed),'pose':default_pose()}
+    return {'schema_version':1,'generator_version':'0.9.0','seed':seed,'age':25,'curvature_probability':curvature_probability,'body':sample_body(seed,curvature_probability),'appearance':'approved_orchid_bob_v1','face':sample_face(seed),'makeup':sample_style_makeup(seed,style),'outfit':sample_outfit(seed,style),'accessories':sample_accessories(seed,style),'style':style,'hair':sample_hair(seed,style),'skin':sample_skin(seed),'pose':default_pose()}
 
 def validate(spec):
     if not isinstance(spec,dict) or spec.get('schema_version')!=1:raise ValueError('Unsupported chibi preset version')
@@ -222,6 +233,7 @@ def validate(spec):
     spec.setdefault('face',default_face());spec.setdefault('makeup',default_makeup())
     face=spec['face'];makeup=spec['makeup']
     if not isinstance(face,dict) or not isinstance(makeup,dict):raise ValueError('Invalid face or makeup group')
+    for key,value in FACE_DETAIL_DEFAULTS.items():face.setdefault(key,value)
     for key,(lo,hi) in FACE_LIMITS.items():
         value=face.get(key)
         if isinstance(value,bool) or not isinstance(value,(int,float)) or not math.isfinite(value) or not lo<=value<=hi:raise ValueError('Invalid face parameter: '+key)
@@ -277,7 +289,7 @@ def randomize_spec(spec,seed=None,locked=()):
     fresh=generate_spec(seed,out['curvature_probability'],style_mix=out['style'])
     for group in GROUPS:
         if group not in locked:out[group]=fresh[group];out[group+'_seed']=fresh['seed']
-    out['seed']=fresh['seed'];out['generator_version']='0.8.1';return validate(out)
+    out['seed']=fresh['seed'];out['generator_version']='0.9.0';return validate(out)
 
 
 POSE_PRESETS=json.loads((Path(__file__).parent/'config/poses.json').read_text(encoding='utf8'))['presets']

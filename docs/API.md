@@ -13,7 +13,9 @@ from chibi_generator import model, studio
 
 character = generate_character(seed=12345, style="goth")
 character.set_body(height=0.65, breast_size=0.55, glute_size=0.7)
-character.set_face(preset="heart", expression="cheerful", eye_color="jade")
+character.set_face(preset="heart", expression="wink", eye_color="jade",
+                   nose_width=-0.2, nose_projection=0.3, mouth_width=0.2,
+                   lip_fullness=0.4, brow_height=0.1, brow_arch=0.3)
 character.set_makeup(preset="rose", intensity=0.8, freckles=0.25)
 character.set_outfit(dress="none", top="corset", bottom="longskirt",
                      shoes="platforms", legwear="fishnet")
@@ -26,6 +28,8 @@ character.save_preset(bpy.path.abspath("//character.json"))
 ```
 
 `save_preset()` сохраняет параметры. `load_character(path)` создаёт нового персонажа. Чтобы заменить параметры существующего, используй `character.apply(model.load_preset(path))`.
+
+Шесть новых полей лица — `nose_width`, `nose_projection`, `mouth_width`, `lip_fullness`, `brow_height`, `brow_arch` — принимают значения от −1 до 1. В старых JSON они по умолчанию равны нулю. Выражения: `calm`, `cheerful`, `serious`, `dreamy`, `wink`. Подмигивает левая сторона персонажа; случайная генерация сохраняет прежний набор четырёх выражений, подмигивание выбирается вручную.
 
 ## Стиль и независимая случайная генерация
 

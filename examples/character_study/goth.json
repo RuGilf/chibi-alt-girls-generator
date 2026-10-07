@@ -1,0 +1,75 @@
+{
+  "accessories": [
+    "choker",
+    "earring",
+    "moon"
+  ],
+  "age": 25,
+  "appearance": "approved_orchid_bob_v1",
+  "body": {
+    "breast_size": 0.5,
+    "calf_size": 0.5,
+    "curve_direction": -1,
+    "curve_severity": 0,
+    "glute_size": 0.5,
+    "height": 0.45,
+    "leg_asymmetry": 0.037777590314464274,
+    "shoulder_tilt": -0.003102037193793047,
+    "thigh_size": 0.55
+  },
+  "curvature_probability": 0.04,
+  "face": {
+    "brow_arch": 0.35,
+    "brow_height": 0.1,
+    "cheeks": -0.15,
+    "chin": 0.65,
+    "expression": "calm",
+    "eye_color": "jade",
+    "eye_size": 0.94,
+    "eye_spacing": -0.12,
+    "eye_tilt": 0.12,
+    "jaw": -0.2,
+    "lip_fullness": 0.05,
+    "mouth_width": -0.05,
+    "nose_projection": 0.32,
+    "nose_width": -0.2,
+    "preset": "oval",
+    "width": -0.4
+  },
+  "generator_version": "0.9.0",
+  "hair": {
+    "color": "black",
+    "pattern": "streaks",
+    "preset": "goth_long",
+    "secondary": "burgundy"
+  },
+  "makeup": {
+    "freckles": 0.08,
+    "intensity": 1.0,
+    "preset": "berry"
+  },
+  "outfit": {
+    "bottom": "lace_mini",
+    "dress": "goth_maxi",
+    "legwear": "fishnet",
+    "palette": "default",
+    "shoes": "platforms",
+    "top": "victoriancoat"
+  },
+  "pose": {
+    "left": "auto",
+    "mirror": false,
+    "preset": "hip",
+    "right": "auto"
+  },
+  "schema_version": 1,
+  "seed": 9100,
+  "skin": {
+    "preset": "porcelain",
+    "shade": 0,
+    "undertone": 0
+  },
+  "style": {
+    "goth": 1.0
+  }
+}

@@ -9,7 +9,7 @@ from . import model,scene,studio,library
 _PREVIEWS=None
 FACE_LABELS={'classic':'Классическое','round':'Круглое','oval':'Овальное','heart':'Сердечком','soft_square':'Мягкое квадратное','elfin':'Эльфийское'}
 MAKEUP_LABELS={'natural':'Нежный','rose':'Розовый','peach':'Персиковый','lavender':'Лавандовый','smoky':'Дымчатый','graphic':'Графические стрелки','berry':'Ягодный','teal':'Бирюзовый','sunset':'Закатный','freckles':'Веснушки'}
-EXPRESSION_LABELS={'calm':'Спокойное','cheerful':'Радостное','serious':'Серьёзное','dreamy':'Мечтательное'}
+EXPRESSION_LABELS={'calm':'Спокойное','cheerful':'Радостное','serious':'Серьёзное','dreamy':'Мечтательное','wink':'Подмигивание'}
 EYE_LABELS={'violet':'Фиолетовый','blue':'Синий','jade':'Нефритовый','amber':'Янтарный','brown':'Карий','rose':'Розовый'}
 POSE_ITEMS=[(k,v['label'],v['label'],0,i) for i,(k,v) in enumerate(model.POSE_PRESETS.items())];GESTURE_ITEMS=[(k,v,v,i) for i,(k,v) in enumerate(model.GESTURES.items())]
 FACE_ITEMS=[];MAKEUP_ITEMS=[];HAIR_ITEMS=[(key,cfg['label'],cfg['label'],0,i) for i,(key,cfg) in enumerate(model.HAIR_PRESETS.items())]
@@ -180,6 +180,12 @@ class ChibiSettings(bpy.types.PropertyGroup):
     eye_size:FloatProperty(name='Размер глаз',min=0.86,max=1.14,get=group_get('face','eye_size',1),set=group_set('face','eye_size'))
     eye_spacing:FloatProperty(name='Расстояние между глазами',min=-1,max=1,get=group_get('face','eye_spacing',0),set=group_set('face','eye_spacing'))
     eye_tilt:FloatProperty(name='Наклон глаз',min=-1,max=1,get=group_get('face','eye_tilt',0),set=group_set('face','eye_tilt'))
+    nose_width:FloatProperty(name='Ширина носа',min=-1,max=1,get=group_get('face','nose_width',0),set=group_set('face','nose_width'))
+    nose_projection:FloatProperty(name='Выступ носа',min=-1,max=1,get=group_get('face','nose_projection',0),set=group_set('face','nose_projection'))
+    mouth_width:FloatProperty(name='Ширина рта',min=-1,max=1,get=group_get('face','mouth_width',0),set=group_set('face','mouth_width'))
+    lip_fullness:FloatProperty(name='Полнота губ',min=-1,max=1,get=group_get('face','lip_fullness',0),set=group_set('face','lip_fullness'))
+    brow_height:FloatProperty(name='Высота бровей',min=-1,max=1,get=group_get('face','brow_height',0),set=group_set('face','brow_height'))
+    brow_arch:FloatProperty(name='Изгиб бровей',min=-1,max=1,get=group_get('face','brow_arch',0),set=group_set('face','brow_arch'))
     makeup_intensity:FloatProperty(name='Интенсивность',min=0,max=1,get=group_get('makeup','intensity',1),set=group_set('makeup','intensity'))
     freckles:FloatProperty(name='Веснушки',min=0,max=1,get=group_get('makeup','freckles',0),set=group_set('makeup','freckles'))
 
@@ -433,6 +439,8 @@ class CHIBI_PT_main(bpy.types.Panel):
             l.operator('chibi.randomize_face',icon='FILE_REFRESH');row=l.row();row.alignment='CENTER';row.template_icon_view(s,'face_preset',show_labels=True,scale=5,scale_popup=5)
             l.prop(s,'face_preset',text='');l.prop(s,'expression');l.prop(s,'eye_color')
             for key in ('face_width','jaw','cheeks','chin','eye_size','eye_spacing','eye_tilt'):l.prop(s,key,slider=True)
+            box=l.box();box.label(text='Нос, губы и брови')
+            for key in model.FACE_DETAIL_DEFAULTS:box.prop(s,key,slider=True)
         elif s.tab=='OUTFIT':
             l.operator('chibi.randomize_outfit',icon='FILE_REFRESH')
             l.prop(s,'outfit_dress')

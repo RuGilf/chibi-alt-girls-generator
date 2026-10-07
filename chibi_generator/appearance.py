@@ -13,7 +13,7 @@ def apply_materials(objects,rig,spec):
         if ob.type!='MESH' or ob.hide_render:continue
         for slot in ob.material_slots:
             mat=slot.material
-            if not mat or not mat.use_nodes or mat.get('chibi_hair_material'):continue
+            if not mat or not mat.use_nodes or mat.get('chibi_hair_material') or mat.get('chibi_lip_detail'):continue
             source=mat
             sockets=[sock for node in mat.node_tree.nodes for sock in node.inputs if node.type in ('BSDF_PRINCIPLED','MIX_RGB') and is_skin_socket(sock)]
             if not sockets and not mat.node_tree.nodes.get('Chibi skin tone'):continue

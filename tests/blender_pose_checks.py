@@ -1,4 +1,6 @@
 import bpy,bmesh,sys,json,numpy as np,tempfile
+from mathutils import Vector
+from mathutils.bvhtree import BVHTree
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]/'chibi_generator';sys.path.insert(0,str(ROOT.parent))
 import chibi_generator as cg
@@ -15,8 +17,24 @@ def check():
             ev=ob.evaluated_get(deps);mesh=ev.to_mesh();p=np.array([v.co[:] for v in mesh.vertices]);assert np.isfinite(p).all();assert np.max(np.ptp(p,axis=0))<.25;ev.to_mesh_clear()
     assert np.isfinite(signature()).all()
     for side in ('L','R'):
+        hand=next(o for o in c.objects if o.get('chibi_hand')==side and not o.get('chibi_digit') and not o.hide_render)
+        tree=BVHTree.FromObject(hand,deps)
+        for nail in (o for o in c.objects if o.get('chibi_hand')==side and o.get('chibi_digit') and not o.hide_render):
+            ev=nail.evaluated_get(deps);mesh=ev.to_mesh()
+            center=sum((v.co for v in mesh.vertices),Vector())/len(mesh.vertices);ev.to_mesh_clear()
+            center=hand.matrix_world.inverted()@nail.matrix_world@center
+            assert tree.find_nearest(center)[3]<.0035,('Detached nail',nail.name,c.parameters['pose'])
+    for side in ('L','R'):
         pb=c.rig.pose.bones['foot.'+side];assert (pb.head-pb.bone.head_local).length<.003,(c.parameters['pose'],c.parameters['body']['height'],side,(pb.head-pb.bone.head_local).length,tuple(pb.head-pb.bone.head_local))
 # Exactly one manifold skin surface for each hand, separate attached nail meshes.
+for arm in (o for o in c.objects if o.get('chibi_asset','').startswith('Underlying arm')):
+    side='L' if scene.rest_points(arm)[:,0].mean()>0 else 'R'
+    assert arm['chibi_wrist_rev']==hands.REVISION
+    for vertex,p in zip(arm.data.vertices,scene.rest_points(arm)):
+        if .84<p[2]<.885:
+            actual={arm.vertex_groups[g.group].name:g.weight for g in vertex.groups}
+            assert abs(sum(actual.values())-1)<1e-5
+            for bone,w in hands.wrist_weights(p[2],side).items():assert abs(actual.get(bone,0)-w)<1e-5
 for side in ('L','R'):
     ob=next(o for o in c.objects if o.get('chibi_hand')==side and not o.get('chibi_digit'))
     bm=bmesh.new();bm.from_mesh(ob.data);bm.verts.ensure_lookup_table();assert all(e.is_manifold for e in bm.edges)
@@ -46,6 +64,6 @@ assert bpy.ops.chibi.pose_reset()=={'FINISHED'} and c.parameters['pose']==model.
 # Migration of a deterministic v0.7 fixture, created without personal saves.
 with bpy.data.libraries.load(str(ROOT.parent/'tests/fixtures/legacy_v07.blend')) as (src,dst):dst.collections=[next(n for n in src.collections if n.startswith('CHIBI '))]
 col=dst.collections[0];bpy.context.scene.collection.children.link(col);old=scene.Character(next(o for o in col.objects if o.get('chibi_spec')));before=old.parameters;old.apply(before);assert old.parameters==before;assert sum(bool(o.get('chibi_hand')) and not o.hide_render for o in old.objects)==12
-report=dict(status='PASS',standing_poses=10,mirrored_poses=20,explicit_gestures=6,manifold_connected_hand_surfaces=2,nails_per_hand=5,all_pose_height_posture_extremes=20,finite_evaluated_geometry=True,hand_weight_normalization=True,feet_planted_tolerance_m=.003,no_pose_drift=True,JSON_pose_and_gesture_roundtrip=True,manual_UI=True,random_appearance_preserves_pose=True,legacy_scene_migration=True)
+report=dict(status='PASS',standing_poses=10,mirrored_poses=20,explicit_gestures=6,manifold_connected_hand_surfaces=2,nails_per_hand=5,nail_surface_distance_tolerance_m=.0035,shared_wrist_weights=True,all_pose_height_posture_extremes=20,finite_evaluated_geometry=True,hand_weight_normalization=True,feet_planted_tolerance_m=.003,no_pose_drift=True,JSON_pose_and_gesture_roundtrip=True,manual_UI=True,random_appearance_preserves_pose=True,legacy_scene_migration=True)
 (ROOT.parent/'build/test-reports').mkdir(parents=True,exist_ok=True)
 (ROOT.parent/'build/test-reports/poses.json').write_text(json.dumps(report,indent=2));print('POSE_FEATURES_PASS',report,flush=True);cg.unregister()
