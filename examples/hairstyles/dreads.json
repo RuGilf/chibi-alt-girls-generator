@@ -1,0 +1,61 @@
+{
+  "accessories": [
+    "bracelets"
+  ],
+  "age": 25,
+  "appearance": "approved_orchid_bob_v1",
+  "body": {
+    "breast_size": 0.4,
+    "calf_size": 0.5,
+    "curve_direction": 1,
+    "curve_severity": 0,
+    "glute_size": 0.55,
+    "height": 0.5,
+    "leg_asymmetry": 0,
+    "shoulder_tilt": 0,
+    "thigh_size": 0.5
+  },
+  "curvature_probability": 0.04,
+  "face": {
+    "cheeks": 0.537773601800197,
+    "chin": 0.1309028141625745,
+    "expression": "calm",
+    "eye_color": "violet",
+    "eye_size": 1.0720126918746222,
+    "eye_spacing": -0.28337134440905487,
+    "eye_tilt": 0.6487734297550677,
+    "jaw": -0.4244321038345496,
+    "preset": "elfin",
+    "width": -0.18434118461415
+  },
+  "generator_version": "0.7",
+  "hair": {
+    "color": "chestnut",
+    "pattern": "dipped",
+    "preset": "dreads",
+    "secondary": "copper"
+  },
+  "makeup": {
+    "freckles": 0,
+    "intensity": 0.8986156328901436,
+    "preset": "teal"
+  },
+  "outfit": {
+    "bottom": "shorts",
+    "dress": "none",
+    "legwear": "fishnet",
+    "palette": "default",
+    "shoes": "cyberplatforms",
+    "top": "meshtop"
+  },
+  "schema_version": 1,
+  "seed": 27028,
+  "skin": {
+    "preset": "espresso",
+    "shade": 0.0,
+    "undertone": 0.0
+  },
+  "style": {
+    "cyber": 1.0
+  }
+}

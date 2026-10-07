@@ -1,0 +1,61 @@
+{
+  "accessories": [
+    "waistchain"
+  ],
+  "age": 25,
+  "appearance": "approved_orchid_bob_v1",
+  "body": {
+    "breast_size": 0.4,
+    "calf_size": 0.5,
+    "curve_direction": -1,
+    "curve_severity": 0,
+    "glute_size": 0.55,
+    "height": 0.5,
+    "leg_asymmetry": 0,
+    "shoulder_tilt": 0,
+    "thigh_size": 0.5
+  },
+  "curvature_probability": 0.04,
+  "face": {
+    "cheeks": -0.16750803549461069,
+    "chin": 0.6720498425585915,
+    "expression": "serious",
+    "eye_color": "violet",
+    "eye_size": 0.9208187944004004,
+    "eye_spacing": -0.09077964657969709,
+    "eye_tilt": 0.14222009238142866,
+    "jaw": -0.24873758228021484,
+    "preset": "oval",
+    "width": -0.37727730183315417
+  },
+  "generator_version": "0.7",
+  "hair": {
+    "color": "silver",
+    "pattern": "ombre",
+    "preset": "shag",
+    "secondary": "lilac"
+  },
+  "makeup": {
+    "freckles": 0,
+    "intensity": 0.87736729333094,
+    "preset": "smoky"
+  },
+  "outfit": {
+    "bottom": "baggyjeans",
+    "dress": "none",
+    "legwear": "tights",
+    "palette": "default",
+    "shoes": "skateshoes",
+    "top": "oversizedtee"
+  },
+  "schema_version": 1,
+  "seed": 27012,
+  "skin": {
+    "preset": "peach",
+    "shade": 0.0,
+    "undertone": 0.0
+  },
+  "style": {
+    "grunge": 1.0
+  }
+}

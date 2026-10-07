@@ -1,0 +1,961 @@
+{
+  "goth": {
+    "label": "Классическая готка",
+    "weights": {
+      "top": {
+        "corset": 4,
+        "victoriancoat": 3,
+        "bandtee": 2
+      },
+      "bottom": {
+        "longskirt": 4,
+        "lace_mini": 3,
+        "pleated": 2
+      },
+      "shoes": {
+        "platforms": 3,
+        "combat": 2
+      },
+      "dress": {
+        "none": 4,
+        "goth_maxi": 6
+      },
+      "legwear": {
+        "tights": 3,
+        "fishnet": 2
+      },
+      "palette": {
+        "default": 2
+      }
+    },
+    "accessories": {
+      "choker": 0.8,
+      "cross": 0.75,
+      "earring": 0.6
+    },
+    "makeup": [
+      "smoky",
+      "berry"
+    ]
+  },
+  "romantic": {
+    "label": "Romantic Goth",
+    "weights": {
+      "top": {
+        "romanticblouse": 4,
+        "corset": 3,
+        "victoriancoat": 2
+      },
+      "bottom": {
+        "velvetmaxi": 4,
+        "tieredskirt": 3,
+        "longskirt": 2
+      },
+      "shoes": {
+        "maryjane": 3,
+        "platforms": 2
+      },
+      "dress": {
+        "none": 4,
+        "romantic": 6
+      },
+      "legwear": {
+        "tights": 3,
+        "stockings": 2
+      },
+      "palette": {
+        "default": 2
+      }
+    },
+    "accessories": {
+      "cameo": 0.8,
+      "earring": 0.8,
+      "wristbands": 0.25
+    },
+    "makeup": [
+      "berry",
+      "lavender"
+    ]
+  },
+  "pastel": {
+    "label": "Pastel Goth",
+    "weights": {
+      "top": {
+        "pastelhoodie": 4,
+        "egirlcrop": 3,
+        "sweater": 2
+      },
+      "bottom": {
+        "lace_mini": 4,
+        "pleated": 3,
+        "skater": 2
+      },
+      "shoes": {
+        "platforms": 4,
+        "maryjane": 3,
+        "sneakers": 2
+      },
+      "dress": {
+        "none": 8,
+        "pastel": 2
+      },
+      "legwear": {
+        "striped": 4,
+        "stockings": 3,
+        "tights": 2
+      },
+      "palette": {
+        "default": 2
+      }
+    },
+    "accessories": {
+      "choker": 0.8,
+      "moon": 0.7,
+      "bow": 0.65,
+      "bracelets": 0.65
+    },
+    "makeup": [
+      "lavender",
+      "rose"
+    ]
+  },
+  "cyber": {
+    "label": "Cyber Goth",
+    "weights": {
+      "top": {
+        "cyberjacket": 4,
+        "meshtop": 3,
+        "techjacket": 2
+      },
+      "bottom": {
+        "tripp": 4,
+        "cargo": 3,
+        "shorts": 2
+      },
+      "shoes": {
+        "cyberplatforms": 3,
+        "platforms": 2
+      },
+      "dress": {
+        "none": 10
+      },
+      "legwear": {
+        "fishnet": 3,
+        "tights": 2
+      },
+      "palette": {
+        "default": 2
+      }
+    },
+    "accessories": {
+      "goggles": 0.95,
+      "mask": 0.6,
+      "legstraps": 0.8,
+      "bracelets": 0.7
+    },
+    "makeup": [
+      "teal",
+      "graphic"
+    ]
+  },
+  "emo": {
+    "label": "Эмочка",
+    "weights": {
+      "top": {
+        "emocrop": 4,
+        "bandtee": 3,
+        "sweater": 2
+      },
+      "bottom": {
+        "skinnyjeans": 4,
+        "rippedjeans": 3,
+        "tartanskirt": 2
+      },
+      "shoes": {
+        "skateshoes": 4,
+        "sneakers": 3,
+        "combat": 2
+      },
+      "dress": {
+        "none": 10
+      },
+      "legwear": {
+        "tights": 3,
+        "striped": 2
+      },
+      "palette": {
+        "default": 2
+      }
+    },
+    "accessories": {
+      "wristbands": 0.85,
+      "waistchain": 0.7,
+      "safety_pin": 0.6
+    },
+    "makeup": [
+      "smoky",
+      "graphic"
+    ]
+  },
+  "scene": {
+    "label": "Scene girl",
+    "weights": {
+      "top": {
+        "scenetee": 4,
+        "pastelhoodie": 3,
+        "oversizedtee": 2
+      },
+      "bottom": {
+        "skinnyjeans": 4,
+        "shorts": 3,
+        "tartanskirt": 2
+      },
+      "shoes": {
+        "skateshoes": 3,
+        "sneakers": 2
+      },
+      "dress": {
+        "none": 10
+      },
+      "legwear": {
+        "striped": 3,
+        "tights": 2
+      },
+      "palette": {
+        "default": 2
+      }
+    },
+    "accessories": {
+      "bow": 0.95,
+      "bracelets": 0.95,
+      "hairclip": 0.8,
+      "waistchain": 0.6
+    },
+    "makeup": [
+      "teal",
+      "rose"
+    ]
+  },
+  "egirl": {
+    "label": "E-girl",
+    "weights": {
+      "top": {
+        "egirlcrop": 4,
+        "emocrop": 3,
+        "meshtop": 2
+      },
+      "bottom": {
+        "pleated": 4,
+        "cargo": 3,
+        "lace_mini": 2
+      },
+      "shoes": {
+        "platforms": 3,
+        "sneakers": 2
+      },
+      "dress": {
+        "none": 10
+      },
+      "legwear": {
+        "stockings": 4,
+        "striped": 3,
+        "fishnet": 2
+      },
+      "palette": {
+        "default": 2
+      }
+    },
+    "accessories": {
+      "choker": 0.9,
+      "waistchain": 0.8,
+      "hairclip": 0.8,
+      "bracelets": 0.5
+    },
+    "makeup": [
+      "rose",
+      "graphic"
+    ]
+  },
+  "grunge": {
+    "label": "Grunge",
+    "weights": {
+      "top": {
+        "flannel": 4,
+        "oversizedtee": 3,
+        "grungesweater": 2
+      },
+      "bottom": {
+        "rippedjeans": 4,
+        "baggyjeans": 3,
+        "patchjeans": 2
+      },
+      "shoes": {
+        "skateshoes": 3,
+        "combat": 2
+      },
+      "dress": {
+        "none": 10
+      },
+      "legwear": {
+        "tights": 2
+      },
+      "palette": {
+        "default": 2
+      }
+    },
+    "accessories": {
+      "waistchain": 0.55,
+      "wristbands": 0.35
+    },
+    "makeup": [
+      "natural",
+      "smoky"
+    ]
+  },
+  "soft_grunge": {
+    "label": "Soft Grunge",
+    "weights": {
+      "top": {
+        "grungesweater": 4,
+        "sweater": 3,
+        "meshtop": 2
+      },
+      "bottom": {
+        "lace_mini": 4,
+        "skater": 3,
+        "shorts": 2
+      },
+      "shoes": {
+        "combat": 3,
+        "boots": 2
+      },
+      "dress": {
+        "none": 10
+      },
+      "legwear": {
+        "fishnet": 3,
+        "tights": 2
+      },
+      "palette": {
+        "default": 2
+      }
+    },
+    "accessories": {
+      "choker": 0.8,
+      "moon": 0.55,
+      "waistchain": 0.65
+    },
+    "makeup": [
+      "smoky",
+      "berry"
+    ]
+  },
+  "punk": {
+    "label": "Панк",
+    "weights": {
+      "top": {
+        "biker": 4,
+        "patchvest": 3,
+        "bandtee": 2
+      },
+      "bottom": {
+        "patchjeans": 4,
+        "rippedjeans": 3,
+        "tartanskirt": 2
+      },
+      "shoes": {
+        "combat": 3,
+        "platforms": 2
+      },
+      "dress": {
+        "none": 10
+      },
+      "legwear": {
+        "fishnet": 3,
+        "tights": 2
+      },
+      "palette": {
+        "default": 2
+      }
+    },
+    "accessories": {
+      "spikes": 0.9,
+      "safety_pin": 0.9,
+      "waistchain": 0.85,
+      "legstraps": 0.5
+    },
+    "makeup": [
+      "graphic",
+      "smoky"
+    ]
+  },
+  "hardcore": {
+    "label": "Riot / Hardcore Punk",
+    "weights": {
+      "top": {
+        "patchvest": 4,
+        "bandtee": 3,
+        "biker": 2
+      },
+      "bottom": {
+        "workpants": 4,
+        "patchjeans": 3,
+        "cargo": 2
+      },
+      "shoes": {
+        "combat": 3,
+        "boots": 2
+      },
+      "dress": {
+        "none": 10
+      },
+      "legwear": {
+        "tights": 2
+      },
+      "palette": {
+        "default": 2
+      }
+    },
+    "accessories": {
+      "safety_pin": 0.9,
+      "waistchain": 0.65,
+      "wristbands": 0.7
+    },
+    "makeup": [
+      "natural",
+      "smoky"
+    ]
+  },
+  "metal": {
+    "label": "Metalhead",
+    "weights": {
+      "top": {
+        "bandtee": 4,
+        "biker": 3,
+        "patchvest": 2
+      },
+      "bottom": {
+        "skinnyjeans": 4,
+        "rippedjeans": 3,
+        "workpants": 2
+      },
+      "shoes": {
+        "combat": 3,
+        "boots": 2
+      },
+      "dress": {
+        "none": 10
+      },
+      "legwear": {
+        "tights": 2
+      },
+      "palette": {
+        "default": 2
+      }
+    },
+    "accessories": {
+      "wristbands": 0.95,
+      "cross": 0.5,
+      "waistchain": 0.7
+    },
+    "makeup": [
+      "natural",
+      "smoky"
+    ]
+  },
+  "y2k": {
+    "label": "Nu-metal / Y2K alt",
+    "weights": {
+      "top": {
+        "egirlcrop": 4,
+        "meshtop": 3,
+        "bandtee": 2
+      },
+      "bottom": {
+        "baggyjeans": 4,
+        "tripp": 3,
+        "cargo": 2
+      },
+      "shoes": {
+        "sneakers": 4,
+        "skateshoes": 3,
+        "platforms": 2
+      },
+      "dress": {
+        "none": 10
+      },
+      "legwear": {
+        "tights": 2
+      },
+      "palette": {
+        "default": 2
+      }
+    },
+    "accessories": {
+      "choker": 0.8,
+      "waistchain": 0.9,
+      "bracelets": 0.65
+    },
+    "makeup": [
+      "smoky",
+      "graphic"
+    ]
+  },
+  "mall": {
+    "label": "Mall Goth",
+    "weights": {
+      "top": {
+        "emocrop": 4,
+        "meshtop": 3,
+        "bandtee": 2
+      },
+      "bottom": {
+        "tripp": 4,
+        "cargo": 3,
+        "baggyjeans": 2
+      },
+      "shoes": {
+        "platforms": 3,
+        "combat": 2
+      },
+      "dress": {
+        "none": 10
+      },
+      "legwear": {
+        "tights": 2
+      },
+      "palette": {
+        "default": 2
+      }
+    },
+    "accessories": {
+      "choker": 0.95,
+      "waistchain": 0.95,
+      "wristbands": 0.85,
+      "legstraps": 0.65
+    },
+    "makeup": [
+      "smoky",
+      "berry"
+    ]
+  },
+  "industrial": {
+    "label": "Industrial",
+    "weights": {
+      "top": {
+        "techjacket": 4,
+        "cyberjacket": 3,
+        "meshtop": 2
+      },
+      "bottom": {
+        "cargo": 4,
+        "tripp": 3,
+        "workpants": 2
+      },
+      "shoes": {
+        "combat": 3,
+        "cyberplatforms": 2
+      },
+      "dress": {
+        "none": 10
+      },
+      "legwear": {
+        "tights": 2
+      },
+      "palette": {
+        "default": 2
+      }
+    },
+    "accessories": {
+      "legstraps": 0.85,
+      "mask": 0.5,
+      "waistchain": 0.8,
+      "wristbands": 0.7
+    },
+    "makeup": [
+      "smoky",
+      "graphic"
+    ]
+  },
+  "techwear": {
+    "label": "Techwear Alt",
+    "weights": {
+      "top": {
+        "techjacket": 4,
+        "cyberjacket": 3,
+        "hoodie": 2
+      },
+      "bottom": {
+        "cargo": 4,
+        "workpants": 3,
+        "tripp": 2
+      },
+      "shoes": {
+        "sneakers": 3,
+        "combat": 2
+      },
+      "dress": {
+        "none": 10
+      },
+      "legwear": {
+        "tights": 2
+      },
+      "palette": {
+        "default": 2
+      }
+    },
+    "accessories": {
+      "bag": 0.85,
+      "mask": 0.65,
+      "legstraps": 0.7
+    },
+    "makeup": [
+      "natural",
+      "smoky"
+    ]
+  },
+  "vampire": {
+    "label": "Vampire Goth",
+    "weights": {
+      "top": {
+        "corset": 4,
+        "victoriancoat": 3,
+        "romanticblouse": 2
+      },
+      "bottom": {
+        "velvetmaxi": 4,
+        "longskirt": 3,
+        "tieredskirt": 2
+      },
+      "shoes": {
+        "platforms": 3,
+        "maryjane": 2
+      },
+      "dress": {
+        "none": 3,
+        "vampire": 7
+      },
+      "legwear": {
+        "tights": 2
+      },
+      "palette": {
+        "default": 2
+      }
+    },
+    "accessories": {
+      "cameo": 0.85,
+      "cross": 0.5,
+      "earring": 0.85
+    },
+    "makeup": [
+      "berry",
+      "smoky"
+    ]
+  },
+  "witchy": {
+    "label": "Witchy / Occult",
+    "weights": {
+      "top": {
+        "occulttunic": 4,
+        "fairymesh": 3,
+        "corset": 2
+      },
+      "bottom": {
+        "longskirt": 4,
+        "fairyskirt": 3,
+        "tieredskirt": 2
+      },
+      "shoes": {
+        "boots": 3,
+        "combat": 2
+      },
+      "dress": {
+        "none": 6,
+        "witchy": 4
+      },
+      "legwear": {
+        "tights": 2
+      },
+      "palette": {
+        "default": 2
+      }
+    },
+    "accessories": {
+      "moon": 0.9,
+      "crystal": 0.9,
+      "earring": 0.5
+    },
+    "makeup": [
+      "natural",
+      "berry"
+    ]
+  },
+  "academia": {
+    "label": "Dark Academia",
+    "weights": {
+      "top": {
+        "academiavest": 4,
+        "indiecardigan": 3,
+        "romanticblouse": 2
+      },
+      "bottom": {
+        "tartanskirt": 4,
+        "longskirt": 3,
+        "skinnyjeans": 2
+      },
+      "shoes": {
+        "loafers": 3,
+        "maryjane": 2
+      },
+      "dress": {
+        "none": 10
+      },
+      "legwear": {
+        "tights": 3,
+        "stockings": 2
+      },
+      "palette": {
+        "default": 2
+      }
+    },
+    "accessories": {
+      "glasses": 0.85,
+      "bag": 0.8,
+      "cameo": 0.35
+    },
+    "makeup": [
+      "natural",
+      "peach"
+    ]
+  },
+  "lolita": {
+    "label": "Gothic Lolita",
+    "weights": {
+      "top": {
+        "romanticblouse": 4,
+        "corset": 3,
+        "academiavest": 2
+      },
+      "bottom": {
+        "tieredskirt": 4,
+        "lace_mini": 3,
+        "pleated": 2
+      },
+      "shoes": {
+        "maryjane": 3,
+        "platforms": 2
+      },
+      "dress": {
+        "lolita": 8,
+        "none": 2
+      },
+      "legwear": {
+        "stockings": 3,
+        "striped": 2
+      },
+      "palette": {
+        "default": 2
+      }
+    },
+    "accessories": {
+      "bow": 0.95,
+      "cameo": 0.65,
+      "earring": 0.6
+    },
+    "makeup": [
+      "rose",
+      "lavender"
+    ]
+  },
+  "visual": {
+    "label": "Visual Kei-inspired",
+    "weights": {
+      "top": {
+        "visualjacket": 4,
+        "victoriancoat": 3,
+        "biker": 2
+      },
+      "bottom": {
+        "tripp": 4,
+        "tieredskirt": 3,
+        "skinnyjeans": 2
+      },
+      "shoes": {
+        "platforms": 3,
+        "combat": 2
+      },
+      "dress": {
+        "none": 7,
+        "visual": 3
+      },
+      "legwear": {
+        "tights": 2
+      },
+      "palette": {
+        "default": 2
+      }
+    },
+    "accessories": {
+      "waistchain": 0.95,
+      "wristbands": 0.8,
+      "cross": 0.6,
+      "safety_pin": 0.6
+    },
+    "makeup": [
+      "graphic",
+      "berry"
+    ]
+  },
+  "yami": {
+    "label": "Yami Kawaii / Menhera",
+    "weights": {
+      "top": {
+        "yamikawaii": 4,
+        "pastelhoodie": 3,
+        "scenetee": 2
+      },
+      "bottom": {
+        "shorts": 4,
+        "lace_mini": 3,
+        "pleated": 2
+      },
+      "shoes": {
+        "maryjane": 3,
+        "sneakers": 2
+      },
+      "dress": {
+        "none": 9,
+        "pastel": 1
+      },
+      "legwear": {
+        "striped": 3,
+        "stockings": 2
+      },
+      "palette": {
+        "default": 2
+      }
+    },
+    "accessories": {
+      "bow": 0.8,
+      "bracelets": 0.9,
+      "choker": 0.55
+    },
+    "makeup": [
+      "rose",
+      "peach"
+    ]
+  },
+  "skater": {
+    "label": "Alt skater",
+    "weights": {
+      "top": {
+        "oversizedtee": 4,
+        "bandtee": 3,
+        "hoodie": 2
+      },
+      "bottom": {
+        "baggyjeans": 4,
+        "cargo": 3,
+        "shorts": 2
+      },
+      "shoes": {
+        "skateshoes": 3,
+        "sneakers": 2
+      },
+      "dress": {
+        "none": 10
+      },
+      "legwear": {
+        "tights": 2
+      },
+      "palette": {
+        "default": 2
+      }
+    },
+    "accessories": {
+      "waistchain": 0.85,
+      "wristbands": 0.4
+    },
+    "makeup": [
+      "natural",
+      "freckles"
+    ]
+  },
+  "indie": {
+    "label": "Indie Alt",
+    "weights": {
+      "top": {
+        "indiecardigan": 4,
+        "scenetee": 3,
+        "flannel": 2
+      },
+      "bottom": {
+        "tartanskirt": 4,
+        "baggyjeans": 3,
+        "skater": 2
+      },
+      "shoes": {
+        "loafers": 3,
+        "skateshoes": 2
+      },
+      "dress": {
+        "none": 8,
+        "vintage": 2
+      },
+      "legwear": {
+        "tights": 2
+      },
+      "palette": {
+        "default": 2
+      }
+    },
+    "accessories": {
+      "glasses": 0.7,
+      "bag": 0.8,
+      "bracelets": 0.5
+    },
+    "makeup": [
+      "teal",
+      "peach"
+    ]
+  },
+  "fairy": {
+    "label": "Fairy Grunge",
+    "weights": {
+      "top": {
+        "fairymesh": 4,
+        "grungesweater": 3,
+        "occulttunic": 2
+      },
+      "bottom": {
+        "fairyskirt": 4,
+        "tieredskirt": 3,
+        "longskirt": 2
+      },
+      "shoes": {
+        "boots": 3,
+        "combat": 2
+      },
+      "dress": {
+        "none": 8,
+        "witchy": 2
+      },
+      "legwear": {
+        "fishnet": 3,
+        "tights": 2
+      },
+      "palette": {
+        "default": 2
+      }
+    },
+    "accessories": {
+      "crystal": 0.95,
+      "moon": 0.8,
+      "waistchain": 0.35
+    },
+    "makeup": [
+      "natural",
+      "freckles"
+    ]
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "accessories": [
+    "earring",
+    "cameo"
+  ],
+  "age": 25,
+  "appearance": "approved_orchid_bob_v1",
+  "body": {
+    "breast_size": 0.4,
+    "calf_size": 0.5,
+    "curve_direction": 1,
+    "curve_severity": 0,
+    "glute_size": 0.55,
+    "height": 0.5,
+    "leg_asymmetry": 0,
+    "shoulder_tilt": 0,
+    "thigh_size": 0.5
+  },
+  "curvature_probability": 0.04,
+  "face": {
+    "cheeks": 0.47632831746952525,
+    "chin": 0.13949465572295364,
+    "expression": "cheerful",
+    "eye_color": "amber",
+    "eye_size": 0.9866669509962817,
+    "eye_spacing": -0.2534673941372378,
+    "eye_tilt": 0.625744528205839,
+    "jaw": -0.401584526413172,
+    "preset": "elfin",
+    "width": -0.15532677438384676
+  },
+  "generator_version": "0.7",
+  "hair": {
+    "color": "chestnut",
+    "pattern": "streaks",
+    "preset": "braid",
+    "secondary": "blonde"
+  },
+  "makeup": {
+    "freckles": 0,
+    "intensity": 0.9687576729255009,
+    "preset": "lavender"
+  },
+  "outfit": {
+    "bottom": "tieredskirt",
+    "dress": "romantic",
+    "legwear": "tights",
+    "palette": "default",
+    "shoes": "platforms",
+    "top": "romanticblouse"
+  },
+  "schema_version": 1,
+  "seed": 27026,
+  "skin": {
+    "preset": "porcelain",
+    "shade": 0.0,
+    "undertone": 0.0
+  },
+  "style": {
+    "romantic": 1.0
+  }
+}

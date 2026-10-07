@@ -1,0 +1,68 @@
+{
+  "accessories": [
+    "choker",
+    "earring"
+  ],
+  "age": 25,
+  "appearance": "approved_orchid_bob_v1",
+  "body": {
+    "breast_size": 0.45,
+    "calf_size": 0.5,
+    "curve_direction": 1,
+    "curve_severity": 0,
+    "glute_size": 0.5,
+    "height": 0.5,
+    "leg_asymmetry": 0,
+    "shoulder_tilt": 0,
+    "thigh_size": 0.5
+  },
+  "curvature_probability": 0.04,
+  "face": {
+    "cheeks": 0,
+    "chin": 0,
+    "expression": "cheerful",
+    "eye_color": "violet",
+    "eye_size": 1,
+    "eye_spacing": 0,
+    "eye_tilt": 0,
+    "jaw": 0,
+    "preset": "classic",
+    "width": 0
+  },
+  "generator_version": "0.8",
+  "hair": {
+    "color": "ink",
+    "pattern": "streaks",
+    "preset": "bob",
+    "secondary": "orchid"
+  },
+  "makeup": {
+    "freckles": 0.2,
+    "intensity": 0.8,
+    "preset": "rose"
+  },
+  "outfit": {
+    "bottom": "pleated",
+    "dress": "none",
+    "legwear": "stockings",
+    "palette": "default",
+    "shoes": "boots",
+    "top": "classic"
+  },
+  "pose": {
+    "left": "auto",
+    "mirror": false,
+    "preset": "shy",
+    "right": "auto"
+  },
+  "schema_version": 1,
+  "seed": 405,
+  "skin": {
+    "preset": "peach",
+    "shade": 0,
+    "undertone": 0
+  },
+  "style": {
+    "egirl": 1.0
+  }
+}

@@ -1,0 +1,368 @@
+{
+  "presets": {
+    "bob": {
+      "label": "Одобренный боб",
+      "family": "legacy"
+    },
+    "short_bob": {
+      "label": "Короткое каре",
+      "family": "loose",
+      "end": 1.42,
+      "bangs": "curtain",
+      "width": 0.34
+    },
+    "cropped_bob": {
+      "label": "Каре до скул",
+      "family": "loose",
+      "end": 1.48,
+      "bangs": "side",
+      "width": 0.345
+    },
+    "blunt_bob": {
+      "label": "Каре с прямой чёлкой",
+      "family": "loose",
+      "end": 1.33,
+      "bangs": "blunt",
+      "width": 0.345
+    },
+    "asym_bob": {
+      "label": "Асимметричное каре",
+      "family": "loose",
+      "end": 1.27,
+      "bangs": "side",
+      "asym": 0.15,
+      "width": 0.35
+    },
+    "long_bob": {
+      "label": "Удлинённое каре",
+      "family": "loose",
+      "end": 1.16,
+      "bangs": "curtain",
+      "width": 0.35
+    },
+    "long_straight": {
+      "label": "Длинные прямые",
+      "family": "loose",
+      "end": 0.88,
+      "bangs": "curtain",
+      "width": 0.35
+    },
+    "long_wavy": {
+      "label": "Длинные волнистые",
+      "family": "loose",
+      "end": 0.91,
+      "bangs": "curtain",
+      "wave": 0.028,
+      "width": 0.37
+    },
+    "romantic_curls": {
+      "label": "Романтические локоны",
+      "family": "loose",
+      "end": 1.02,
+      "bangs": "blunt",
+      "curl": 0.035,
+      "width": 0.37
+    },
+    "goth_long": {
+      "label": "Очень длинные готические",
+      "family": "loose",
+      "end": 0.66,
+      "bangs": "blunt",
+      "width": 0.35
+    },
+    "side_swept": {
+      "label": "Длинные с косой чёлкой",
+      "family": "loose",
+      "end": 0.97,
+      "bangs": "side",
+      "asym": 0.07,
+      "width": 0.35
+    },
+    "wolf": {
+      "label": "Wolf cut",
+      "family": "layered",
+      "end": 1.04,
+      "bangs": "choppy",
+      "width": 0.35,
+      "wave": 0.018
+    },
+    "shag": {
+      "label": "Растрёпанный shag",
+      "family": "layered",
+      "end": 1.24,
+      "bangs": "choppy",
+      "width": 0.375,
+      "wave": 0.024
+    },
+    "mullet": {
+      "label": "Маллет",
+      "family": "layered",
+      "end": 1.1,
+      "bangs": "short",
+      "width": 0.335,
+      "mullet": true
+    },
+    "pixie": {
+      "label": "Пикси",
+      "family": "short",
+      "bangs": "short",
+      "width": 0.335
+    },
+    "undercut": {
+      "label": "Андеркат",
+      "family": "short",
+      "bangs": "side",
+      "width": 0.334,
+      "undercut": true
+    },
+    "side_shave": {
+      "label": "Выбритый висок",
+      "family": "loose",
+      "end": 1.19,
+      "bangs": "side",
+      "width": 0.35,
+      "shave": true
+    },
+    "mohawk": {
+      "label": "Ирокез",
+      "family": "mohawk",
+      "bangs": "none",
+      "width": 0.333
+    },
+    "scene": {
+      "label": "Объёмная Scene",
+      "family": "layered",
+      "end": 1.08,
+      "bangs": "side",
+      "width": 0.4,
+      "scene": true
+    },
+    "high_pony": {
+      "label": "Высокий хвост",
+      "family": "tied",
+      "end": 0.99,
+      "bangs": "curtain",
+      "tails": 1,
+      "high": true
+    },
+    "low_pony": {
+      "label": "Низкий хвост",
+      "family": "tied",
+      "end": 1.03,
+      "bangs": "side",
+      "tails": 1,
+      "high": false
+    },
+    "twin_tails": {
+      "label": "Два высоких хвостика",
+      "family": "tied",
+      "end": 1.04,
+      "bangs": "blunt",
+      "tails": 2,
+      "high": true
+    },
+    "low_twins": {
+      "label": "Два низких хвостика",
+      "family": "tied",
+      "end": 1.12,
+      "bangs": "curtain",
+      "tails": 2,
+      "high": false
+    },
+    "space_buns": {
+      "label": "Два пучка",
+      "family": "buns",
+      "bangs": "blunt",
+      "count": 2
+    },
+    "messy_bun": {
+      "label": "Небрежный пучок",
+      "family": "buns",
+      "bangs": "curtain",
+      "count": 1
+    },
+    "half_up": {
+      "label": "Полусобранные с пучком",
+      "family": "loose",
+      "end": 1.01,
+      "bangs": "curtain",
+      "width": 0.35,
+      "bun": true,
+      "wave": 0.016
+    },
+    "braid": {
+      "label": "Одна длинная коса",
+      "family": "braids",
+      "count": 1,
+      "end": 0.88,
+      "bangs": "side"
+    },
+    "twin_braids": {
+      "label": "Две косы",
+      "family": "braids",
+      "count": 2,
+      "end": 0.99,
+      "bangs": "curtain"
+    },
+    "dreads": {
+      "label": "Объёмные дреды",
+      "family": "dreads",
+      "end": 1.09,
+      "bangs": "short",
+      "width": 0.37
+    },
+    "cyber_dreads": {
+      "label": "Cyber-дреды и пряди",
+      "family": "dreads",
+      "end": 0.99,
+      "bangs": "none",
+      "width": 0.4,
+      "cyber": true
+    }
+  },
+  "style_weights": {
+    "goth": {
+      "goth_long": 4.0,
+      "long_straight": 3.35,
+      "long_wavy": 2.7,
+      "bob": 2.05
+    },
+    "romantic": {
+      "romantic_curls": 4.0,
+      "long_wavy": 3.35,
+      "half_up": 2.7,
+      "braid": 2.05
+    },
+    "pastel": {
+      "twin_tails": 4.0,
+      "space_buns": 3.35,
+      "blunt_bob": 2.7,
+      "long_bob": 2.05
+    },
+    "cyber": {
+      "cyber_dreads": 4.0,
+      "dreads": 3.35,
+      "undercut": 2.7,
+      "mohawk": 2.05
+    },
+    "emo": {
+      "side_swept": 4.0,
+      "asym_bob": 3.35,
+      "scene": 2.7,
+      "long_straight": 2.05
+    },
+    "scene": {
+      "scene": 4.0,
+      "side_swept": 3.35,
+      "twin_tails": 2.7
+    },
+    "egirl": {
+      "twin_tails": 4.0,
+      "space_buns": 3.35,
+      "blunt_bob": 2.7,
+      "long_bob": 2.05
+    },
+    "grunge": {
+      "shag": 4.0,
+      "wolf": 3.35,
+      "long_wavy": 2.7,
+      "low_pony": 2.05
+    },
+    "soft_grunge": {
+      "wolf": 4.0,
+      "long_bob": 3.35,
+      "shag": 2.7
+    },
+    "punk": {
+      "mohawk": 4.0,
+      "pixie": 3.35,
+      "undercut": 2.7,
+      "side_shave": 2.05
+    },
+    "hardcore": {
+      "undercut": 4.0,
+      "pixie": 3.35,
+      "mohawk": 2.7
+    },
+    "metal": {
+      "long_straight": 4.0,
+      "long_wavy": 3.35,
+      "low_pony": 2.7
+    },
+    "y2k": {
+      "high_pony": 4.0,
+      "twin_braids": 3.35,
+      "long_straight": 2.7,
+      "mullet": 2.05
+    },
+    "mall": {
+      "scene": 4.0,
+      "side_swept": 3.35,
+      "goth_long": 2.7
+    },
+    "industrial": {
+      "undercut": 4.0,
+      "side_shave": 3.35,
+      "short_bob": 2.7
+    },
+    "techwear": {
+      "wolf": 4.0,
+      "short_bob": 3.35,
+      "undercut": 2.7,
+      "high_pony": 2.05
+    },
+    "vampire": {
+      "goth_long": 4.0,
+      "long_straight": 3.35,
+      "romantic_curls": 2.7
+    },
+    "witchy": {
+      "long_wavy": 4.0,
+      "braid": 3.35,
+      "half_up": 2.7,
+      "goth_long": 2.05
+    },
+    "academia": {
+      "short_bob": 4.0,
+      "long_bob": 3.35,
+      "low_pony": 2.7,
+      "braid": 2.05
+    },
+    "lolita": {
+      "romantic_curls": 4.0,
+      "twin_tails": 3.35,
+      "space_buns": 2.7,
+      "blunt_bob": 2.05
+    },
+    "visual": {
+      "scene": 4.0,
+      "asym_bob": 3.35,
+      "mohawk": 2.7,
+      "wolf": 2.05
+    },
+    "yami": {
+      "twin_tails": 4.0,
+      "blunt_bob": 3.35,
+      "space_buns": 2.7,
+      "low_twins": 2.05
+    },
+    "skater": {
+      "shag": 4.0,
+      "wolf": 3.35,
+      "mullet": 2.7,
+      "messy_bun": 2.05
+    },
+    "indie": {
+      "cropped_bob": 4.0,
+      "shag": 3.35,
+      "pixie": 2.7,
+      "long_bob": 2.05
+    },
+    "fairy": {
+      "long_wavy": 4.0,
+      "twin_braids": 3.35,
+      "half_up": 2.7,
+      "shag": 2.05
+    }
+  }
+}

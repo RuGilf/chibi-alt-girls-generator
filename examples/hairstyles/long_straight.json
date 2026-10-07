@@ -1,0 +1,61 @@
+{
+  "accessories": [
+    "cross"
+  ],
+  "age": 25,
+  "appearance": "approved_orchid_bob_v1",
+  "body": {
+    "breast_size": 0.4,
+    "calf_size": 0.5,
+    "curve_direction": -1,
+    "curve_severity": 0,
+    "glute_size": 0.55,
+    "height": 0.5,
+    "leg_asymmetry": 0,
+    "shoulder_tilt": 0,
+    "thigh_size": 0.5
+  },
+  "curvature_probability": 0.04,
+  "face": {
+    "cheeks": 0.05263431178394468,
+    "chin": -0.04901107881660999,
+    "expression": "dreamy",
+    "eye_color": "brown",
+    "eye_size": 1.0338724580632943,
+    "eye_spacing": -0.008711248228842665,
+    "eye_tilt": -0.05393562775740826,
+    "jaw": 0.020874001848986058,
+    "preset": "classic",
+    "width": -0.012668371372720845
+  },
+  "generator_version": "0.7",
+  "hair": {
+    "color": "black",
+    "pattern": "ombre",
+    "preset": "long_straight",
+    "secondary": "burgundy"
+  },
+  "makeup": {
+    "freckles": 0,
+    "intensity": 0.8340675719463252,
+    "preset": "smoky"
+  },
+  "outfit": {
+    "bottom": "longskirt",
+    "dress": "goth_maxi",
+    "legwear": "tights",
+    "palette": "default",
+    "shoes": "platforms",
+    "top": "victoriancoat"
+  },
+  "schema_version": 1,
+  "seed": 27006,
+  "skin": {
+    "preset": "copper",
+    "shade": 0.0,
+    "undertone": 0.0
+  },
+  "style": {
+    "goth": 1.0
+  }
+}

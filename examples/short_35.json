@@ -1,0 +1,17 @@
+{
+  "age": 25,
+  "appearance": "approved_orchid_bob_v1",
+  "body": {
+    "calf_size": 0.4507569980056571,
+    "curve_direction": 1,
+    "curve_severity": 0.0,
+    "height": 0.1587588814830343,
+    "leg_asymmetry": -0.05534198634946337,
+    "shoulder_tilt": -0.0061546384363064125,
+    "thigh_size": 0.21581011738350425
+  },
+  "curvature_probability": 0.04,
+  "generator_version": "0.2.0",
+  "schema_version": 1,
+  "seed": 35
+}

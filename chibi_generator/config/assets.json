@@ -1,0 +1,544 @@
+{
+  "top": {
+    "classic": {
+      "label": "Куртка и топ",
+      "builder": "legacy"
+    },
+    "hoodie": {
+      "label": "Лиловый худи",
+      "builder": "legacy"
+    },
+    "sweater": {
+      "label": "Полосатый свитер",
+      "builder": "legacy"
+    },
+    "bandtee": {
+      "label": "Футболка Moon Ritual",
+      "builder": "tee",
+      "print": "moon",
+      "color": "black",
+      "sleeve": "short"
+    },
+    "oversizedtee": {
+      "label": "Oversize-футболка с принтом",
+      "builder": "tee",
+      "print": "star",
+      "color": "charcoal",
+      "oversize": true,
+      "sleeve": "short"
+    },
+    "pastelhoodie": {
+      "label": "Пастельный худи с сердцем",
+      "builder": "hoodie",
+      "print": "heart",
+      "color": "pink",
+      "oversize": true
+    },
+    "cyberjacket": {
+      "label": "Виниловая cyber-куртка",
+      "builder": "jacket",
+      "color": "black",
+      "accent": "acid",
+      "vinyl": true,
+      "tech": true
+    },
+    "emocrop": {
+      "label": "Полосатые рукава и футболка",
+      "builder": "layered",
+      "color": "black",
+      "pattern": "stripes",
+      "print": "broken_heart"
+    },
+    "scenetee": {
+      "label": "Scene-футболка со звездой",
+      "builder": "tee",
+      "color": "cyan",
+      "accent": "pink",
+      "print": "star",
+      "sleeve": "short"
+    },
+    "egirlcrop": {
+      "label": "Короткий топ и лонгслив",
+      "builder": "layered",
+      "color": "black",
+      "accent": "lilac",
+      "print": "heart",
+      "crop": true,
+      "pattern": "stripes"
+    },
+    "flannel": {
+      "label": "Клетчатая фланелевая рубашка",
+      "builder": "shirt",
+      "color": "burgundy",
+      "pattern": "plaid"
+    },
+    "grungesweater": {
+      "label": "Свободный свитер с прорезями",
+      "builder": "sweater",
+      "color": "olive",
+      "oversize": true,
+      "distressed": true
+    },
+    "biker": {
+      "label": "Кожаная косуха",
+      "builder": "jacket",
+      "color": "black",
+      "leather": true,
+      "asymmetric": true,
+      "studs": true
+    },
+    "patchvest": {
+      "label": "Жилет с нашивками поверх футболки",
+      "builder": "vest",
+      "color": "charcoal",
+      "patches": true
+    },
+    "meshtop": {
+      "label": "Топ с сетчатыми рукавами",
+      "builder": "layered",
+      "color": "black",
+      "pattern": "mesh",
+      "crop": true
+    },
+    "corset": {
+      "label": "Корсет с кружевной блузой",
+      "builder": "corset",
+      "color": "black",
+      "accent": "ivory",
+      "lace": true
+    },
+    "romanticblouse": {
+      "label": "Блуза с пышными рукавами",
+      "builder": "blouse",
+      "color": "burgundy",
+      "velvet": true,
+      "puff": true,
+      "lace": true
+    },
+    "techjacket": {
+      "label": "Асимметричная techwear-куртка",
+      "builder": "jacket",
+      "color": "charcoal",
+      "tech": true,
+      "asymmetric": true
+    },
+    "academiavest": {
+      "label": "Рубашка и академический жилет",
+      "builder": "vest",
+      "color": "brown",
+      "accent": "ivory",
+      "buttons": true
+    },
+    "victoriancoat": {
+      "label": "Викторианский сюртук",
+      "builder": "coat",
+      "color": "black",
+      "accent": "burgundy",
+      "lace": true
+    },
+    "occulttunic": {
+      "label": "Свободная туника с луной",
+      "builder": "tunic",
+      "color": "olive",
+      "accent": "gold",
+      "print": "moon"
+    },
+    "yamikawaii": {
+      "label": "Пастельный oversize с пластырем",
+      "builder": "hoodie",
+      "color": "pink",
+      "accent": "black",
+      "print": "bandage",
+      "oversize": true
+    },
+    "indiecardigan": {
+      "label": "Винтажный кардиган",
+      "builder": "cardigan",
+      "color": "moss",
+      "accent": "mustard",
+      "buttons": true
+    },
+    "visualjacket": {
+      "label": "Многослойный сценический жакет",
+      "builder": "coat",
+      "color": "black",
+      "accent": "burgundy",
+      "asymmetric": true,
+      "chains": true
+    },
+    "fairymesh": {
+      "label": "Сетчатый верх с драпировкой",
+      "builder": "layered",
+      "color": "brown",
+      "accent": "moss",
+      "pattern": "mesh",
+      "lace": true
+    }
+  },
+  "bottom": {
+    "pleated": {
+      "label": "Плиссированная юбка",
+      "builder": "legacy"
+    },
+    "skater": {
+      "label": "Юбка с мягкими складками",
+      "builder": "legacy"
+    },
+    "shorts": {
+      "label": "Джинсовые шорты",
+      "builder": "legacy"
+    },
+    "longskirt": {
+      "label": "Длинная готическая юбка",
+      "builder": "skirt",
+      "color": "black",
+      "length": 0.24,
+      "flare": 0.29,
+      "lace": true
+    },
+    "velvetmaxi": {
+      "label": "Бархатная макси-юбка",
+      "builder": "skirt",
+      "color": "burgundy",
+      "length": 0.2,
+      "flare": 0.28,
+      "velvet": true
+    },
+    "tieredskirt": {
+      "label": "Многоярусная юбка",
+      "builder": "skirt",
+      "color": "black",
+      "length": 0.35,
+      "flare": 0.29,
+      "tiers": 3
+    },
+    "tartanskirt": {
+      "label": "Клетчатая мини-юбка",
+      "builder": "skirt",
+      "color": "burgundy",
+      "length": 0.65,
+      "flare": 0.24,
+      "pattern": "plaid",
+      "pleats": 12
+    },
+    "lace_mini": {
+      "label": "Мини-юбка с кружевным краем",
+      "builder": "skirt",
+      "color": "black",
+      "length": 0.64,
+      "flare": 0.235,
+      "lace": true
+    },
+    "skinnyjeans": {
+      "label": "Узкие чёрные джинсы",
+      "builder": "pants",
+      "color": "denim",
+      "width": 0.06
+    },
+    "rippedjeans": {
+      "label": "Рваные джинсы",
+      "builder": "pants",
+      "color": "denim",
+      "width": 0.065,
+      "ripped": true
+    },
+    "baggyjeans": {
+      "label": "Широкие джинсы Y2K",
+      "builder": "pants",
+      "color": "blue",
+      "width": 0.083,
+      "baggy": true
+    },
+    "cargo": {
+      "label": "Карго с накладными карманами",
+      "builder": "pants",
+      "color": "charcoal",
+      "width": 0.079,
+      "pockets": true,
+      "straps": true
+    },
+    "tripp": {
+      "label": "Широкие штаны с ремнями",
+      "builder": "pants",
+      "color": "black",
+      "width": 0.087,
+      "baggy": true,
+      "straps": true,
+      "chains": true
+    },
+    "workpants": {
+      "label": "Рабочие брюки с заплатками",
+      "builder": "pants",
+      "color": "olive",
+      "width": 0.077,
+      "patches": true,
+      "pockets": true
+    },
+    "patchjeans": {
+      "label": "Панк-джинсы с нашивками",
+      "builder": "pants",
+      "color": "denim",
+      "width": 0.068,
+      "patches": true,
+      "ripped": true
+    },
+    "fairyskirt": {
+      "label": "Многослойная fairy-юбка",
+      "builder": "skirt",
+      "color": "moss",
+      "accent": "brown",
+      "length": 0.29,
+      "flare": 0.285,
+      "tiers": 3,
+      "asymmetric": true
+    }
+  },
+  "dress": {
+    "none": {
+      "label": "Без платья",
+      "builder": "none"
+    },
+    "goth_maxi": {
+      "label": "Чёрное платье с корсетной шнуровкой",
+      "builder": "dress",
+      "color": "black",
+      "length": 0.23,
+      "flare": 0.29,
+      "corset": true,
+      "lace": true
+    },
+    "romantic": {
+      "label": "Бархатное романтическое платье",
+      "builder": "dress",
+      "color": "burgundy",
+      "length": 0.3,
+      "flare": 0.31,
+      "corset": true,
+      "puff": true,
+      "lace": true,
+      "velvet": true
+    },
+    "vampire": {
+      "label": "Платье с высоким воротником",
+      "builder": "dress",
+      "color": "black",
+      "accent": "burgundy",
+      "length": 0.22,
+      "flare": 0.28,
+      "corset": true,
+      "collar": true,
+      "velvet": true
+    },
+    "lolita": {
+      "label": "Пышное платье с бантами",
+      "builder": "dress",
+      "color": "black",
+      "accent": "ivory",
+      "length": 0.58,
+      "flare": 0.33,
+      "puff": true,
+      "lace": true,
+      "bows": true,
+      "tiers": 2
+    },
+    "witchy": {
+      "label": "Свободное платье со звёздами",
+      "builder": "dress",
+      "color": "black",
+      "accent": "gold",
+      "length": 0.28,
+      "flare": 0.29,
+      "print": "moon",
+      "bell": true
+    },
+    "pastel": {
+      "label": "Пастельное платье с тёмным кантом",
+      "builder": "dress",
+      "color": "pink",
+      "accent": "black",
+      "length": 0.6,
+      "flare": 0.29,
+      "puff": true,
+      "bows": true
+    },
+    "visual": {
+      "label": "Сценическое платье со шлейфом",
+      "builder": "dress",
+      "color": "black",
+      "accent": "burgundy",
+      "length": 0.42,
+      "flare": 0.29,
+      "corset": true,
+      "asymmetric": true,
+      "lace": true
+    },
+    "vintage": {
+      "label": "Винтажное платье с воротничком",
+      "builder": "dress",
+      "color": "moss",
+      "accent": "ivory",
+      "length": 0.45,
+      "flare": 0.28,
+      "collar": true,
+      "buttons": true
+    }
+  },
+  "shoes": {
+    "boots": {
+      "label": "Ботинки на платформе",
+      "builder": "legacy"
+    },
+    "sneakers": {
+      "label": "Кеды на платформе",
+      "builder": "legacy"
+    },
+    "platforms": {
+      "label": "Высокие готические платформы",
+      "builder": "shoe",
+      "height": 0.42,
+      "platform": 0.1,
+      "color": "black",
+      "buckles": true
+    },
+    "cyberplatforms": {
+      "label": "Cyber-платформы с неоном",
+      "builder": "shoe",
+      "height": 0.38,
+      "platform": 0.12,
+      "color": "black",
+      "accent": "acid",
+      "buckles": true,
+      "tech": true
+    },
+    "maryjane": {
+      "label": "Mary Jane с ремешком",
+      "builder": "shoe",
+      "height": 0.16,
+      "platform": 0.055,
+      "color": "black",
+      "strap": true
+    },
+    "skateshoes": {
+      "label": "Низкие скейтерские кеды",
+      "builder": "shoe",
+      "height": 0.19,
+      "platform": 0.055,
+      "color": "charcoal",
+      "accent": "ivory",
+      "laces": true
+    },
+    "loafers": {
+      "label": "Лоферы с металлической пряжкой",
+      "builder": "shoe",
+      "height": 0.16,
+      "platform": 0.045,
+      "color": "brown",
+      "buckle": true
+    },
+    "combat": {
+      "label": "Берцы с ремнями и шнуровкой",
+      "builder": "shoe",
+      "height": 0.4,
+      "platform": 0.075,
+      "color": "black",
+      "buckles": true,
+      "laces": true
+    }
+  },
+  "legwear": {
+    "tights": {
+      "label": "Чёрные колготки",
+      "builder": "legwear"
+    },
+    "fishnet": {
+      "label": "Сетчатые колготки",
+      "builder": "legwear"
+    },
+    "stockings": {
+      "label": "Гольфы с кантом",
+      "builder": "legwear"
+    },
+    "striped": {
+      "label": "Полосатые гольфы",
+      "builder": "legwear"
+    },
+    "bare": {
+      "label": "Без колготок",
+      "builder": "legwear"
+    }
+  },
+  "accessories": {
+    "choker": {
+      "label": "Чокер с кольцом",
+      "builder": "accessory"
+    },
+    "earring": {
+      "label": "Серьга-капля",
+      "builder": "accessory"
+    },
+    "hairclip": {
+      "label": "Заколка-луна",
+      "builder": "accessory"
+    },
+    "cross": {
+      "label": "Крест на цепочке",
+      "builder": "accessory"
+    },
+    "cameo": {
+      "label": "Викторианская камея",
+      "builder": "accessory"
+    },
+    "crystal": {
+      "label": "Кристалл на подвеске",
+      "builder": "accessory"
+    },
+    "moon": {
+      "label": "Подвеска-луна",
+      "builder": "accessory"
+    },
+    "wristbands": {
+      "label": "Напульсники",
+      "builder": "accessory"
+    },
+    "spikes": {
+      "label": "Шипы на напульсниках",
+      "builder": "accessory"
+    },
+    "goggles": {
+      "label": "Cyber-очки на голове",
+      "builder": "accessory"
+    },
+    "mask": {
+      "label": "Маска",
+      "builder": "accessory"
+    },
+    "glasses": {
+      "label": "Круглые очки",
+      "builder": "accessory"
+    },
+    "bow": {
+      "label": "Бант в волосах",
+      "builder": "accessory"
+    },
+    "bag": {
+      "label": "Сумка через плечо",
+      "builder": "accessory"
+    },
+    "waistchain": {
+      "label": "Цепь на поясе",
+      "builder": "accessory"
+    },
+    "legstraps": {
+      "label": "Ремни на ноге",
+      "builder": "accessory"
+    },
+    "bracelets": {
+      "label": "Цветные браслеты",
+      "builder": "accessory"
+    },
+    "safety_pin": {
+      "label": "Булавка на груди",
+      "builder": "accessory"
+    }
+  }
+}

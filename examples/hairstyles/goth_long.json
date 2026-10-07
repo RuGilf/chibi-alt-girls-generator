@@ -1,0 +1,62 @@
+{
+  "accessories": [
+    "choker",
+    "cross"
+  ],
+  "age": 25,
+  "appearance": "approved_orchid_bob_v1",
+  "body": {
+    "breast_size": 0.4,
+    "calf_size": 0.5,
+    "curve_direction": -1,
+    "curve_severity": 0,
+    "glute_size": 0.55,
+    "height": 0.5,
+    "leg_asymmetry": 0,
+    "shoulder_tilt": 0,
+    "thigh_size": 0.5
+  },
+  "curvature_probability": 0.04,
+  "face": {
+    "cheeks": 0.654342859031402,
+    "chin": -0.5298059365651522,
+    "expression": "cheerful",
+    "eye_color": "jade",
+    "eye_size": 1.0478001851150318,
+    "eye_spacing": 0.2314881396150191,
+    "eye_tilt": -0.16782681350958878,
+    "jaw": 0.24787159449700805,
+    "preset": "round",
+    "width": 0.3933962972664047
+  },
+  "generator_version": "0.7",
+  "hair": {
+    "color": "ink",
+    "pattern": "streaks",
+    "preset": "goth_long",
+    "secondary": "orchid"
+  },
+  "makeup": {
+    "freckles": 0,
+    "intensity": 0.9977018757977889,
+    "preset": "smoky"
+  },
+  "outfit": {
+    "bottom": "lace_mini",
+    "dress": "none",
+    "legwear": "tights",
+    "palette": "default",
+    "shoes": "combat",
+    "top": "bandtee"
+  },
+  "schema_version": 1,
+  "seed": 27009,
+  "skin": {
+    "preset": "ebony",
+    "shade": 0.0,
+    "undertone": 0.0
+  },
+  "style": {
+    "goth": 1.0
+  }
+}

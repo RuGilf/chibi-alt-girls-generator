@@ -1,0 +1,62 @@
+{
+  "accessories": [
+    "wristbands",
+    "waistchain"
+  ],
+  "age": 25,
+  "appearance": "approved_orchid_bob_v1",
+  "body": {
+    "breast_size": 0.4,
+    "calf_size": 0.5,
+    "curve_direction": -1,
+    "curve_severity": 0,
+    "glute_size": 0.55,
+    "height": 0.5,
+    "leg_asymmetry": 0,
+    "shoulder_tilt": 0,
+    "thigh_size": 0.5
+  },
+  "curvature_probability": 0.04,
+  "face": {
+    "cheeks": 0.22597023940484817,
+    "chin": 0.3944480585207034,
+    "expression": "serious",
+    "eye_color": "rose",
+    "eye_size": 0.9988883088759866,
+    "eye_spacing": 0.12433404679140231,
+    "eye_tilt": 0.323816575818366,
+    "jaw": -0.61441577201384,
+    "preset": "heart",
+    "width": 0.12700609462232892
+  },
+  "generator_version": "0.7",
+  "hair": {
+    "color": "chestnut",
+    "pattern": "streaks",
+    "preset": "wolf",
+    "secondary": "honey"
+  },
+  "makeup": {
+    "freckles": 0,
+    "intensity": 0.8570022693798217,
+    "preset": "natural"
+  },
+  "outfit": {
+    "bottom": "patchjeans",
+    "dress": "none",
+    "legwear": "tights",
+    "palette": "default",
+    "shoes": "combat",
+    "top": "flannel"
+  },
+  "schema_version": 1,
+  "seed": 27011,
+  "skin": {
+    "preset": "umber",
+    "shade": 0.0,
+    "undertone": 0.0
+  },
+  "style": {
+    "grunge": 1.0
+  }
+}

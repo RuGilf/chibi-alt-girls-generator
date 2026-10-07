@@ -1,0 +1,63 @@
+{
+  "accessories": [
+    "wristbands",
+    "waistchain",
+    "legstraps"
+  ],
+  "age": 25,
+  "appearance": "approved_orchid_bob_v1",
+  "body": {
+    "breast_size": 0.4,
+    "calf_size": 0.5,
+    "curve_direction": -1,
+    "curve_severity": 0,
+    "glute_size": 0.55,
+    "height": 0.5,
+    "leg_asymmetry": 0,
+    "shoulder_tilt": 0,
+    "thigh_size": 0.5
+  },
+  "curvature_probability": 0.04,
+  "face": {
+    "cheeks": -0.23994051495119806,
+    "chin": 0.19634045880901077,
+    "expression": "calm",
+    "eye_color": "amber",
+    "eye_size": 0.94094027791152,
+    "eye_spacing": 0.15242529389986878,
+    "eye_tilt": -0.06542547932168466,
+    "jaw": 0.729102894833617,
+    "preset": "soft_square",
+    "width": 0.20219231989107386
+  },
+  "generator_version": "0.7",
+  "hair": {
+    "color": "chestnut",
+    "pattern": "ombre",
+    "preset": "short_bob",
+    "secondary": "copper"
+  },
+  "makeup": {
+    "freckles": 0,
+    "intensity": 0.8746420167572062,
+    "preset": "graphic"
+  },
+  "outfit": {
+    "bottom": "cargo",
+    "dress": "none",
+    "legwear": "tights",
+    "palette": "default",
+    "shoes": "combat",
+    "top": "techjacket"
+  },
+  "schema_version": 1,
+  "seed": 27001,
+  "skin": {
+    "preset": "caramel",
+    "shade": 0.0,
+    "undertone": 0.0
+  },
+  "style": {
+    "industrial": 1.0
+  }
+}

@@ -1,0 +1,62 @@
+{
+  "accessories": [
+    "wristbands",
+    "waistchain"
+  ],
+  "age": 25,
+  "appearance": "approved_orchid_bob_v1",
+  "body": {
+    "breast_size": 0.4,
+    "calf_size": 0.5,
+    "curve_direction": 1,
+    "curve_severity": 0,
+    "glute_size": 0.55,
+    "height": 0.5,
+    "leg_asymmetry": 0,
+    "shoulder_tilt": 0,
+    "thigh_size": 0.5
+  },
+  "curvature_probability": 0.04,
+  "face": {
+    "cheeks": -0.0498109285827399,
+    "chin": 0.012164111492477585,
+    "expression": "calm",
+    "eye_color": "jade",
+    "eye_size": 1.0433860087075908,
+    "eye_spacing": 0.046121834188321074,
+    "eye_tilt": -0.029988143385778702,
+    "jaw": 0.017621632617215686,
+    "preset": "classic",
+    "width": -0.05085021280309512
+  },
+  "generator_version": "0.7",
+  "hair": {
+    "color": "silver",
+    "pattern": "dipped",
+    "preset": "asym_bob",
+    "secondary": "blue"
+  },
+  "makeup": {
+    "freckles": 0,
+    "intensity": 0.8615168968281118,
+    "preset": "smoky"
+  },
+  "outfit": {
+    "bottom": "tartanskirt",
+    "dress": "none",
+    "legwear": "tights",
+    "palette": "default",
+    "shoes": "sneakers",
+    "top": "emocrop"
+  },
+  "schema_version": 1,
+  "seed": 27004,
+  "skin": {
+    "preset": "espresso",
+    "shade": 0.0,
+    "undertone": 0.0
+  },
+  "style": {
+    "emo": 1.0
+  }
+}

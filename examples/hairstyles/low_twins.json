@@ -1,0 +1,62 @@
+{
+  "accessories": [
+    "choker",
+    "bracelets"
+  ],
+  "age": 25,
+  "appearance": "approved_orchid_bob_v1",
+  "body": {
+    "breast_size": 0.4,
+    "calf_size": 0.5,
+    "curve_direction": 1,
+    "curve_severity": 0,
+    "glute_size": 0.55,
+    "height": 0.5,
+    "leg_asymmetry": 0,
+    "shoulder_tilt": 0,
+    "thigh_size": 0.5
+  },
+  "curvature_probability": 0.04,
+  "face": {
+    "cheeks": 0.6512597237671772,
+    "chin": -0.5988720103605154,
+    "expression": "serious",
+    "eye_color": "jade",
+    "eye_size": 1.0765870133571018,
+    "eye_spacing": 0.17128154056200354,
+    "eye_tilt": -0.10533354390760921,
+    "jaw": 0.28777815622400127,
+    "preset": "round",
+    "width": 0.3194199632326144
+  },
+  "generator_version": "0.7",
+  "hair": {
+    "color": "black",
+    "pattern": "streaks",
+    "preset": "low_twins",
+    "secondary": "lilac"
+  },
+  "makeup": {
+    "freckles": 0.25,
+    "intensity": 0.961111390270595,
+    "preset": "peach"
+  },
+  "outfit": {
+    "bottom": "shorts",
+    "dress": "none",
+    "legwear": "striped",
+    "palette": "default",
+    "shoes": "sneakers",
+    "top": "yamikawaii"
+  },
+  "schema_version": 1,
+  "seed": 27022,
+  "skin": {
+    "preset": "honey",
+    "shade": 0.0,
+    "undertone": 0.0
+  },
+  "style": {
+    "yami": 1.0
+  }
+}

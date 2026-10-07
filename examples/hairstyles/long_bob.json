@@ -1,0 +1,63 @@
+{
+  "accessories": [
+    "choker",
+    "moon",
+    "bracelets"
+  ],
+  "age": 25,
+  "appearance": "approved_orchid_bob_v1",
+  "body": {
+    "breast_size": 0.4,
+    "calf_size": 0.5,
+    "curve_direction": 1,
+    "curve_severity": 0,
+    "glute_size": 0.55,
+    "height": 0.5,
+    "leg_asymmetry": 0,
+    "shoulder_tilt": 0,
+    "thigh_size": 0.5
+  },
+  "curvature_probability": 0.04,
+  "face": {
+    "cheeks": 0.6378495715287932,
+    "chin": -0.5405368870347051,
+    "expression": "dreamy",
+    "eye_color": "violet",
+    "eye_size": 1.0814657816786206,
+    "eye_spacing": 0.24620114997546924,
+    "eye_tilt": -0.09636323960738838,
+    "jaw": 0.26296234071245955,
+    "preset": "round",
+    "width": 0.3395092961432746
+  },
+  "generator_version": "0.7",
+  "hair": {
+    "color": "auburn",
+    "pattern": "solid",
+    "preset": "long_bob",
+    "secondary": "honey"
+  },
+  "makeup": {
+    "freckles": 0.15,
+    "intensity": 0.9737665579273598,
+    "preset": "rose"
+  },
+  "outfit": {
+    "bottom": "pleated",
+    "dress": "pastel",
+    "legwear": "striped",
+    "palette": "default",
+    "shoes": "platforms",
+    "top": "egirlcrop"
+  },
+  "schema_version": 1,
+  "seed": 27005,
+  "skin": {
+    "preset": "sand",
+    "shade": 0.0,
+    "undertone": 0.0
+  },
+  "style": {
+    "pastel": 1.0
+  }
+}
