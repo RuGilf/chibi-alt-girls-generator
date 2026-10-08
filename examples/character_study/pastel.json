@@ -1,0 +1,74 @@
+{
+  "accessories": [
+    "choker",
+    "earring"
+  ],
+  "age": 25,
+  "appearance": "approved_orchid_bob_v1",
+  "body": {
+    "breast_size": 0.5,
+    "calf_size": 0.5,
+    "curve_direction": 1,
+    "curve_severity": 0,
+    "glute_size": 0.5,
+    "height": 0.505,
+    "leg_asymmetry": 0.006,
+    "shoulder_tilt": 0.004643062284136681,
+    "thigh_size": 0.55
+  },
+  "curvature_probability": 0.04,
+  "face": {
+    "brow_arch": -0.2,
+    "brow_height": 0.18,
+    "cheeks": 0.65,
+    "chin": -0.55,
+    "expression": "wink",
+    "eye_color": "violet",
+    "eye_size": 1.07,
+    "eye_spacing": 0.2,
+    "eye_tilt": -0.12,
+    "jaw": 0.3,
+    "lip_fullness": 0.4,
+    "mouth_width": 0.1,
+    "nose_projection": -0.2,
+    "nose_width": -0.25,
+    "preset": "round",
+    "width": 0.35
+  },
+  "generator_version": "0.9.0",
+  "hair": {
+    "color": "pink",
+    "pattern": "split",
+    "preset": "twin_tails",
+    "secondary": "cyan"
+  },
+  "makeup": {
+    "freckles": 0.08,
+    "intensity": 1.0,
+    "preset": "lavender"
+  },
+  "outfit": {
+    "bottom": "pleated",
+    "dress": "none",
+    "legwear": "striped",
+    "palette": "pastel",
+    "shoes": "platforms",
+    "top": "egirlcrop"
+  },
+  "pose": {
+    "left": "auto",
+    "mirror": false,
+    "preset": "peace",
+    "right": "auto"
+  },
+  "schema_version": 1,
+  "seed": 9101,
+  "skin": {
+    "preset": "peach",
+    "shade": 0,
+    "undertone": 0
+  },
+  "style": {
+    "egirl": 1.0
+  }
+}

@@ -2,22 +2,26 @@
   "top": {
     "classic": {
       "label": "Куртка и топ",
-      "builder": "legacy"
+      "builder": "legacy",
+      "surface": "cloth"
     },
     "hoodie": {
       "label": "Лиловый худи",
-      "builder": "legacy"
+      "builder": "legacy",
+      "surface": "cloth"
     },
     "sweater": {
       "label": "Полосатый свитер",
-      "builder": "legacy"
+      "builder": "legacy",
+      "surface": "knit"
     },
     "bandtee": {
       "label": "Футболка Moon Ritual",
       "builder": "tee",
       "print": "moon",
       "color": "black",
-      "sleeve": "short"
+      "sleeve": "short",
+      "surface": "cloth"
     },
     "oversizedtee": {
       "label": "Oversize-футболка с принтом",
@@ -25,14 +29,16 @@
       "print": "star",
       "color": "charcoal",
       "oversize": true,
-      "sleeve": "short"
+      "sleeve": "short",
+      "surface": "cloth"
     },
     "pastelhoodie": {
       "label": "Пастельный худи с сердцем",
       "builder": "hoodie",
       "print": "heart",
       "color": "pink",
-      "oversize": true
+      "oversize": true,
+      "surface": "cloth"
     },
     "cyberjacket": {
       "label": "Виниловая cyber-куртка",
@@ -40,14 +46,16 @@
       "color": "black",
       "accent": "acid",
       "vinyl": true,
-      "tech": true
+      "tech": true,
+      "surface": "vinyl"
     },
     "emocrop": {
       "label": "Полосатые рукава и футболка",
       "builder": "layered",
       "color": "black",
       "pattern": "stripes",
-      "print": "broken_heart"
+      "print": "broken_heart",
+      "surface": "cloth"
     },
     "scenetee": {
       "label": "Scene-футболка со звездой",
@@ -55,7 +63,8 @@
       "color": "cyan",
       "accent": "pink",
       "print": "star",
-      "sleeve": "short"
+      "sleeve": "short",
+      "surface": "cloth"
     },
     "egirlcrop": {
       "label": "Короткий топ и лонгслив",
@@ -64,20 +73,23 @@
       "accent": "lilac",
       "print": "heart",
       "crop": true,
-      "pattern": "stripes"
+      "pattern": "stripes",
+      "surface": "cloth"
     },
     "flannel": {
       "label": "Клетчатая фланелевая рубашка",
       "builder": "shirt",
       "color": "burgundy",
-      "pattern": "plaid"
+      "pattern": "plaid",
+      "surface": "cloth"
     },
     "grungesweater": {
       "label": "Свободный свитер с прорезями",
       "builder": "sweater",
       "color": "olive",
       "oversize": true,
-      "distressed": true
+      "distressed": true,
+      "surface": "knit"
     },
     "biker": {
       "label": "Кожаная косуха",
@@ -85,27 +97,31 @@
       "color": "black",
       "leather": true,
       "asymmetric": true,
-      "studs": true
+      "studs": true,
+      "surface": "leather"
     },
     "patchvest": {
       "label": "Жилет с нашивками поверх футболки",
       "builder": "vest",
       "color": "charcoal",
-      "patches": true
+      "patches": true,
+      "surface": "cloth"
     },
     "meshtop": {
       "label": "Топ с сетчатыми рукавами",
       "builder": "layered",
       "color": "black",
       "pattern": "mesh",
-      "crop": true
+      "crop": true,
+      "surface": "cloth"
     },
     "corset": {
       "label": "Корсет с кружевной блузой",
       "builder": "corset",
       "color": "black",
       "accent": "ivory",
-      "lace": true
+      "lace": true,
+      "surface": "cloth"
     },
     "romanticblouse": {
       "label": "Блуза с пышными рукавами",
@@ -113,35 +129,40 @@
       "color": "burgundy",
       "velvet": true,
       "puff": true,
-      "lace": true
+      "lace": true,
+      "surface": "velvet"
     },
     "techjacket": {
       "label": "Асимметричная techwear-куртка",
       "builder": "jacket",
       "color": "charcoal",
       "tech": true,
-      "asymmetric": true
+      "asymmetric": true,
+      "surface": "cloth"
     },
     "academiavest": {
       "label": "Рубашка и академический жилет",
       "builder": "vest",
       "color": "brown",
       "accent": "ivory",
-      "buttons": true
+      "buttons": true,
+      "surface": "cloth"
     },
     "victoriancoat": {
       "label": "Викторианский сюртук",
       "builder": "coat",
       "color": "black",
       "accent": "burgundy",
-      "lace": true
+      "lace": true,
+      "surface": "cloth"
     },
     "occulttunic": {
       "label": "Свободная туника с луной",
       "builder": "tunic",
       "color": "olive",
       "accent": "gold",
-      "print": "moon"
+      "print": "moon",
+      "surface": "cloth"
     },
     "yamikawaii": {
       "label": "Пастельный oversize с пластырем",
@@ -149,14 +170,16 @@
       "color": "pink",
       "accent": "black",
       "print": "bandage",
-      "oversize": true
+      "oversize": true,
+      "surface": "cloth"
     },
     "indiecardigan": {
       "label": "Винтажный кардиган",
       "builder": "cardigan",
       "color": "moss",
       "accent": "mustard",
-      "buttons": true
+      "buttons": true,
+      "surface": "knit"
     },
     "visualjacket": {
       "label": "Многослойный сценический жакет",
@@ -164,7 +187,8 @@
       "color": "black",
       "accent": "burgundy",
       "asymmetric": true,
-      "chains": true
+      "chains": true,
+      "surface": "cloth"
     },
     "fairymesh": {
       "label": "Сетчатый верх с драпировкой",
@@ -172,21 +196,29 @@
       "color": "brown",
       "accent": "moss",
       "pattern": "mesh",
-      "lace": true
+      "lace": true,
+      "surface": "cloth"
     }
   },
   "bottom": {
     "pleated": {
       "label": "Плиссированная юбка",
-      "builder": "legacy"
+      "builder": "legacy",
+      "surface": "cloth"
     },
     "skater": {
       "label": "Юбка с мягкими складками",
-      "builder": "legacy"
+      "builder": "legacy",
+      "surface": "cloth"
     },
     "shorts": {
       "label": "Джинсовые шорты",
-      "builder": "legacy"
+      "builder": "pants",
+      "surface": "denim",
+      "width": 0.077,
+      "length": 0.625,
+      "color": "denim",
+      "accent": "charcoal"
     },
     "longskirt": {
       "label": "Длинная готическая юбка",
@@ -194,7 +226,8 @@
       "color": "black",
       "length": 0.24,
       "flare": 0.29,
-      "lace": true
+      "lace": true,
+      "surface": "cloth"
     },
     "velvetmaxi": {
       "label": "Бархатная макси-юбка",
@@ -202,7 +235,8 @@
       "color": "burgundy",
       "length": 0.2,
       "flare": 0.28,
-      "velvet": true
+      "velvet": true,
+      "surface": "velvet"
     },
     "tieredskirt": {
       "label": "Многоярусная юбка",
@@ -210,7 +244,8 @@
       "color": "black",
       "length": 0.35,
       "flare": 0.29,
-      "tiers": 3
+      "tiers": 3,
+      "surface": "cloth"
     },
     "tartanskirt": {
       "label": "Клетчатая мини-юбка",
@@ -219,7 +254,8 @@
       "length": 0.65,
       "flare": 0.24,
       "pattern": "plaid",
-      "pleats": 12
+      "pleats": 12,
+      "surface": "cloth"
     },
     "lace_mini": {
       "label": "Мини-юбка с кружевным краем",
@@ -227,27 +263,31 @@
       "color": "black",
       "length": 0.64,
       "flare": 0.235,
-      "lace": true
+      "lace": true,
+      "surface": "cloth"
     },
     "skinnyjeans": {
       "label": "Узкие чёрные джинсы",
       "builder": "pants",
       "color": "denim",
-      "width": 0.06
+      "width": 0.06,
+      "surface": "denim"
     },
     "rippedjeans": {
       "label": "Рваные джинсы",
       "builder": "pants",
       "color": "denim",
       "width": 0.065,
-      "ripped": true
+      "ripped": true,
+      "surface": "denim"
     },
     "baggyjeans": {
       "label": "Широкие джинсы Y2K",
       "builder": "pants",
       "color": "blue",
       "width": 0.083,
-      "baggy": true
+      "baggy": true,
+      "surface": "denim"
     },
     "cargo": {
       "label": "Карго с накладными карманами",
@@ -255,7 +295,8 @@
       "color": "charcoal",
       "width": 0.079,
       "pockets": true,
-      "straps": true
+      "straps": true,
+      "surface": "cloth"
     },
     "tripp": {
       "label": "Широкие штаны с ремнями",
@@ -264,7 +305,8 @@
       "width": 0.087,
       "baggy": true,
       "straps": true,
-      "chains": true
+      "chains": true,
+      "surface": "cloth"
     },
     "workpants": {
       "label": "Рабочие брюки с заплатками",
@@ -272,7 +314,8 @@
       "color": "olive",
       "width": 0.077,
       "patches": true,
-      "pockets": true
+      "pockets": true,
+      "surface": "cloth"
     },
     "patchjeans": {
       "label": "Панк-джинсы с нашивками",
@@ -280,7 +323,8 @@
       "color": "denim",
       "width": 0.068,
       "patches": true,
-      "ripped": true
+      "ripped": true,
+      "surface": "denim"
     },
     "fairyskirt": {
       "label": "Многослойная fairy-юбка",
@@ -290,13 +334,15 @@
       "length": 0.29,
       "flare": 0.285,
       "tiers": 3,
-      "asymmetric": true
+      "asymmetric": true,
+      "surface": "cloth"
     }
   },
   "dress": {
     "none": {
       "label": "Без платья",
-      "builder": "none"
+      "builder": "none",
+      "surface": "cloth"
     },
     "goth_maxi": {
       "label": "Чёрное платье с корсетной шнуровкой",
@@ -305,7 +351,8 @@
       "length": 0.23,
       "flare": 0.29,
       "corset": true,
-      "lace": true
+      "lace": true,
+      "surface": "cloth"
     },
     "romantic": {
       "label": "Бархатное романтическое платье",
@@ -316,7 +363,8 @@
       "corset": true,
       "puff": true,
       "lace": true,
-      "velvet": true
+      "velvet": true,
+      "surface": "velvet"
     },
     "vampire": {
       "label": "Платье с высоким воротником",
@@ -327,7 +375,8 @@
       "flare": 0.28,
       "corset": true,
       "collar": true,
-      "velvet": true
+      "velvet": true,
+      "surface": "velvet"
     },
     "lolita": {
       "label": "Пышное платье с бантами",
@@ -339,7 +388,8 @@
       "puff": true,
       "lace": true,
       "bows": true,
-      "tiers": 2
+      "tiers": 2,
+      "surface": "cloth"
     },
     "witchy": {
       "label": "Свободное платье со звёздами",
@@ -349,7 +399,8 @@
       "length": 0.28,
       "flare": 0.29,
       "print": "moon",
-      "bell": true
+      "bell": true,
+      "surface": "cloth"
     },
     "pastel": {
       "label": "Пастельное платье с тёмным кантом",
@@ -359,7 +410,8 @@
       "length": 0.6,
       "flare": 0.29,
       "puff": true,
-      "bows": true
+      "bows": true,
+      "surface": "cloth"
     },
     "visual": {
       "label": "Сценическое платье со шлейфом",
@@ -370,7 +422,8 @@
       "flare": 0.29,
       "corset": true,
       "asymmetric": true,
-      "lace": true
+      "lace": true,
+      "surface": "cloth"
     },
     "vintage": {
       "label": "Винтажное платье с воротничком",
@@ -380,17 +433,20 @@
       "length": 0.45,
       "flare": 0.28,
       "collar": true,
-      "buttons": true
+      "buttons": true,
+      "surface": "cloth"
     }
   },
   "shoes": {
     "boots": {
       "label": "Ботинки на платформе",
-      "builder": "legacy"
+      "builder": "legacy",
+      "surface": "leather"
     },
     "sneakers": {
       "label": "Кеды на платформе",
-      "builder": "legacy"
+      "builder": "legacy",
+      "surface": "cloth"
     },
     "platforms": {
       "label": "Высокие готические платформы",
@@ -398,7 +454,8 @@
       "height": 0.42,
       "platform": 0.1,
       "color": "black",
-      "buckles": true
+      "buckles": true,
+      "surface": "leather"
     },
     "cyberplatforms": {
       "label": "Cyber-платформы с неоном",
@@ -408,7 +465,8 @@
       "color": "black",
       "accent": "acid",
       "buckles": true,
-      "tech": true
+      "tech": true,
+      "surface": "leather"
     },
     "maryjane": {
       "label": "Mary Jane с ремешком",
@@ -416,7 +474,8 @@
       "height": 0.16,
       "platform": 0.055,
       "color": "black",
-      "strap": true
+      "strap": true,
+      "surface": "leather"
     },
     "skateshoes": {
       "label": "Низкие скейтерские кеды",
@@ -425,7 +484,8 @@
       "platform": 0.055,
       "color": "charcoal",
       "accent": "ivory",
-      "laces": true
+      "laces": true,
+      "surface": "cloth"
     },
     "loafers": {
       "label": "Лоферы с металлической пряжкой",
@@ -433,7 +493,8 @@
       "height": 0.16,
       "platform": 0.045,
       "color": "brown",
-      "buckle": true
+      "buckle": true,
+      "surface": "leather"
     },
     "combat": {
       "label": "Берцы с ремнями и шнуровкой",
@@ -442,7 +503,8 @@
       "platform": 0.075,
       "color": "black",
       "buckles": true,
-      "laces": true
+      "laces": true,
+      "surface": "leather"
     }
   },
   "legwear": {

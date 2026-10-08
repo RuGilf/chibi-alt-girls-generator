@@ -33,7 +33,7 @@ def check(character):
         for mat in ob.data.materials:
             node=mat.node_tree.nodes.get('Chibi skin tone') if mat and mat.node_tree else None
             if node:assert np.allclose(node.outputs[0].default_value[:3],rgb)
-    for name in ('Neck','Ear -1','Chibi unified hand R','Button nose'):
+    for name in ('Neck','Ear -1','Chibi continuous arm and hand R','Button nose'):
         ob=next(o for o in character.objects if o.get('chibi_asset','').split('.')[0]==name);assert ob.data.materials[0].node_tree.nodes.get('Chibi skin tone')
 for i,key in enumerate(model.HAIR_PRESETS):
     c.set_hair(preset=key,pattern=list(model.HAIR_PATTERNS)[i%5]);c.set_skin(preset=list(model.SKIN_TONES)[i%12]);check(c)

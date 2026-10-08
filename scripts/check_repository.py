@@ -8,9 +8,10 @@ import re
 import zipfile
 from pathlib import Path
 from urllib.parse import unquote, urlsplit
+from build_addon import version
 
 ROOT = Path(__file__).resolve().parents[1]
-SKIP = {'.git', '__pycache__', 'build', 'dist', '.venv', 'venv'}
+SKIP = {'.git', '__pycache__', 'build', 'dist', '.venv', 'venv', '.DS_Store', 'Thumbs.db'}
 
 
 def main():
@@ -67,8 +68,9 @@ def main():
             if not (ROOT / f'chibi_generator/assets/previews/{name}_{key}.png').is_file():
                 errors.append(f'Missing preview: {name}_{key}')
     archives = list((ROOT / 'releases').glob('*.zip'))
-    if not archives:
-        errors.append('No installable release ZIP')
+    current_archive = f'chibi_generator_v{version()}.zip'
+    if not any(p.name == current_archive for p in archives):
+        errors.append('No installable release ZIP for the current version')
     for path in archives:
         checksum_file = path.with_suffix('.zip.sha256')
         if not checksum_file.exists() or checksum_file.read_text().split()[0] != hashlib.sha256(path.read_bytes()).hexdigest():
@@ -79,6 +81,9 @@ def main():
                 errors.append(f'Invalid add-on archive: {path.name}')
             if any(not n.startswith('chibi_generator/') or '..' in Path(n).parts for n in names):
                 errors.append(f'Unexpected ZIP path: {path.name}')
+            # Historical releases keep their own contents; compare only the current one.
+            if path.name != current_archive:
+                continue
             expected = {p.relative_to(ROOT).as_posix() for p in (ROOT / 'chibi_generator').rglob('*')
                         if p.is_file() and '__pycache__' not in p.parts
                         and p.suffix in {'.py', '.json', '.blend', '.png'}}

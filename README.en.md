@@ -2,16 +2,16 @@
 
 A modular Blender add-on for creating adult chibi characters in alternative fashion. Build a character manually or randomize body proportions, face, makeup, hair, skin, clothing, accessories, standing poses and hand gestures.
 
-[Русский](README.md) · [Download add-on 0.8.0](releases/chibi_generator_v0.8.0.zip) · [Gallery](docs/GALLERY.md)
+[Русский](README.md) · [Download add-on 0.9.1](releases/chibi_generator_v0.9.1.zip) · [Gallery](docs/GALLERY.md)
 
-![Character examples rendered in Blender](docs/images/characters.jpg)
+![Character examples rendered in Blender](docs/images/characters-0.9.0.jpg)
 
-**Version 0.8.0. Tested with Blender 5.2.2 LTS on macOS. The add-on UI is currently in Russian.** Generation runs locally using the bundled geometry and procedural materials. No AI model, account, external asset service or additional Python package installation is required to use the add-on.
+**Version 0.9.1. Tested with Blender 5.2.2 LTS on macOS. The add-on UI is currently in Russian.** Generation runs locally using the bundled geometry and procedural materials. No AI model, account, external asset service or additional Python package installation is required to use the add-on.
 
 ## Features
 
 - Body height, chest and glute volume, thigh/calf size, leg asymmetry, shoulder tilt and posture variation.
-- 6 face presets, continuous face controls, 4 expressions, 6 eye colors and 10 makeup presets.
+- 6 face presets, continuous face, nose, lip and brow controls, 5 expressions, 6 eye colors and 10 makeup presets.
 - 30 hairstyles, 18 hair colors and 5 coloring patterns.
 - 12 skin tones with lightness and warm/cool undertone controls.
 - 57 clothing/shoe items, 5 legwear options, 6 clothing palettes and 18 accessories.
@@ -22,13 +22,37 @@ A modular Blender add-on for creating adult chibi characters in alternative fash
 
 ## Installation
 
-1. Download the [add-on ZIP](releases/chibi_generator_v0.8.0.zip); keep it zipped.
+1. Download the [add-on ZIP](releases/chibi_generator_v0.9.1.zip); keep it zipped.
 2. In Blender, open **Edit → Preferences → Add-ons**.
 3. Use the upper-right menu → **Install from Disk…** and select the ZIP.
 4. Enable **CHIBI CHARACTER GENERATOR**.
 5. In the 3D Viewport, press **N**, open **АЛЬТУШКА**, then click **Случайная альтушка** to generate a character.
 
 See the [official Blender add-on installation guide](https://docs.blender.org/manual/en/latest/editors/preferences/addons.html). This is a conventional ZIP add-on, not a Blender Extensions manifest package. Other Blender versions and Windows/Linux have not been tested. The 4.2 minimum declared in `bl_info` is not a verified compatibility promise for the bundled `.blend` assets.
+
+## Body and clothing fit in 0.9.1
+
+Continuous arm-to-finger geometry removes the wrist seam. Joined trousers and shorts, smoother hip transitions, fitted stitching, softer knees and shared sleeve/arm weights improve body and clothing deformation.
+
+![Clothing fit before and after](docs/images/fit-comparison-0.9.1.jpg)
+
+[Reference bodies, validation scope and known combination limits](docs/BODY_FIT.md).
+
+## Faces, hair and hands in 0.9.0
+
+Six new face controls, a wink, tapered hair tips, smoother fingers and closer-fitting short nails. All face and hair thumbnails have been refreshed.
+
+![Three reference faces](docs/images/faces-0.9.0.jpg)
+
+[Reference views and reproducible presets](docs/CHARACTER_POLISH.md).
+
+## Materials in 0.8.1
+
+Distinct procedural knit, denim, leather, vinyl and velvet surfaces; fine relief uses neutral mesh coordinates to stay attached during body and pose changes. Colors and patterns are preserved. No texture downloads are needed.
+
+![Material studies rendered in Blender](docs/images/materials-0.8.1.jpg)
+
+This patch also fixes generation after File > New, cosmetic visibility, pose resets during seeded regeneration, and camera setup after JSON loading.
 
 ## Basic workflow
 
@@ -40,7 +64,7 @@ The **Мои** tab contains favorites and JSON/scene/image saving. JSON stores g
 
 ![Standing poses](docs/images/poses.jpg)
 
-![New hands and gestures](docs/images/hands.jpg)
+![New hands and gestures](docs/images/hands-0.9.0.jpg)
 
 Public JSON examples are available in [examples/](examples/). [API examples](docs/API.md).
 

@@ -1,6 +1,6 @@
 """Per-character skin ownership, including skin visible through procedural fabric."""
 import bpy,numpy as np
-from . import model
+from . import model,surfaces
 OLD=(.66,.36,.265)
 
 def is_skin_socket(socket):
@@ -13,7 +13,7 @@ def apply_materials(objects,rig,spec):
         if ob.type!='MESH' or ob.hide_render:continue
         for slot in ob.material_slots:
             mat=slot.material
-            if not mat or not mat.use_nodes or mat.get('chibi_hair_material'):continue
+            if not mat or not mat.use_nodes or mat.get('chibi_hair_material') or mat.get('chibi_lip_detail'):continue
             source=mat
             sockets=[sock for node in mat.node_tree.nodes for sock in node.inputs if node.type in ('BSDF_PRINCIPLED','MIX_RGB') and is_skin_socket(sock)]
             if not sockets and not mat.node_tree.nodes.get('Chibi skin tone'):continue
@@ -29,6 +29,8 @@ def apply_materials(objects,rig,spec):
                 for sock in sockets:
                     if not sock.is_linked:links.new(rgb.outputs[0],sock)
             rgb.outputs[0].default_value=(*color,1);mat.diffuse_color=(*color,1)
+            if ob.get('chibi_part')=='head' and ob.get('chibi_section')!='03 Hair':
+                surfaces.configure(mat,'skin')
     # Brows receive their own material, independent from the sculpted hair meshes.
     brow=np.array(model.HAIR_COLORS[spec['hair']['color']][1])*.43+np.array([.008,.005,.010])
     for ob in objects:

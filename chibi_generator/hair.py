@@ -4,7 +4,7 @@ import bpy,numpy as np
 from math import sin,cos,pi
 from mathutils import Vector
 from . import model,clothing,facial
-REVISION=3
+REVISION=4
 
 def curve(control,steps=10):
     p=[Vector(v) for v in control];out=[]
@@ -18,7 +18,7 @@ def tint_material(rig):
     name='Hair tint • '+rig['chibi_character_id']
     m=bpy.data.materials.get(name)
     if m:return m
-    m=clothing.fabric(name,(.021,.017,.039),.36)
+    m=clothing.fabric(name,(.021,.017,.039),.36,surface='hair')
     # Clean polished locks; fabric bump would look like rough felt.
     bs=m.node_tree.nodes.get('Principled BSDF')
     for link in list(m.node_tree.links):
@@ -35,14 +35,39 @@ class Builder:
         del ob['chibi_slot'];del ob['chibi_option'];ob['chibi_section']='03 Hair';ob['chibi_hair']=self.key;ob['chibi_hair_rev']=REVISION
         ob['chibi_hair_accent']=accent;ob['chibi_hair_light']=light;self.objects.append(ob);return ob
     def lock(self,name,control,width=.045,depth=.015,accent=False,light=False,axis=(1,0,0)):
-        pts=curve(control);m=clothing.Mesh();seg=12;last=None
+        if 'fringe' in name:
+            root=Vector(control[0]);rx=self.cfg.get('width',.347);ry=.280+(rx-.347)*.55
+            root.y=.026-ry*math.sqrt(max(.001,1-(root.x/rx)**2-((root.z-1.534)/.379)**2))+.010
+            control=[tuple(root),*control[1:]]
+        elif name.startswith('feathered layer'):
+            root=Vector(control[0]);rx=self.cfg.get('width',.35)
+            crown=1.534+.379*math.sqrt(max(.001,1-(root.x/rx)**2-((root.y-.026)/.28)**2))
+            root.z=min(root.z,crown-.022)
+            control=[tuple(root),*control[1:]]
+        pts=curve(control)
+        if 'fringe' in name:
+            # Follow the rounded crown instead of bridging it with a flat visor.
+            rx=self.cfg.get('width',.347);ry=.280+(rx-.347)*.55
+            for p in pts:
+                if p.z<=1.73:continue
+                shell=.026-ry*math.sqrt(max(.001,1-(p.x/rx)**2-((p.z-1.534)/.379)**2))
+                if p.z<=1.875:shell=min(shell,float(facial.face_y(np.array([p.x]),np.array([p.z]))[0])-.014)
+                blend=float(facial.smooth(1.73,1.82,p.z))
+                p.y=p.y*(1-blend)+(shell-.003)*blend
+        m=clothing.Mesh();seg=12;last=None
         for i,p in enumerate(pts):
             t=i/(len(pts)-1);tangent=(pts[min(i+1,len(pts)-1)]-pts[max(0,i-1)]).normalized();u=Vector(axis) if last is None else last
             u=u-tangent*u.dot(tangent)
             if u.length<.01:u=tangent.cross(Vector((0,1,0)))
             u.normalize();last=u.copy();n=tangent.cross(u).normalized()
-            w=width*(.48+.52*sin(pi*t*.92))*(1-.97*t**5)*(.10+.90*min(1,t/.10))
-            d=depth*(.40+.60*sin(pi*t))*(1-.92*t**5)*(.12+.88*min(1,t/.08))
+            # Broad embedded roots blend into the cap; gradual tips avoid bead-like bangs.
+            taper=float(facial.smooth(.48,1.,t))
+            w=width*(.72+.28*sin(pi*t))*(1-.98*taper)
+            d=depth*(.65+.35*sin(pi*t))*(1-.96*taper)
+            if 'fringe' in name:d*=.72
+            else:
+                root_blend=.08+.92*float(facial.smooth(0,.14,t))
+                w*=root_blend;d*=root_blend
             for j in range(seg):a=2*pi*j/seg;m.v.append(tuple(p+w*cos(a)*u+d*sin(a)*n))
         for i in range(len(pts)-1):
             for j in range(seg):a=i*seg+j;b=i*seg+(j+1)%seg;m.f.append((a,b,b+seg,a+seg))

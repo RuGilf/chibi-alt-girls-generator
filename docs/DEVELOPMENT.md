@@ -9,7 +9,7 @@ chibi_generator/       устанавливаемое дополнение
   assets/              нейтральная Blender-библиотека и превью
   config/              JSON-каталоги
 examples/              публичные JSON-примеры
-tests/                 17 тестов модели и 4 Blender-набора
+tests/                 20 тестов модели и 8 Blender-наборов
   fixtures/            демонстрационное сохранение v0.7
 scripts/               проверка репозитория, сборка, запуск Blender-тестов
 docs/                  документация и реальные рендеры
@@ -38,7 +38,7 @@ python3 scripts/test_blender.py --blender "/path/to/blender"
 python3 scripts/test_blender.py --blender "/path/to/blender" --suite poses
 ```
 
-Наборы: `app`, `styles`, `appearance`, `poses`, `all` (по умолчанию). Можно задать переменную `BLENDER_BIN` вместо аргумента. Если Blender отсутствует, скрипт выдаёт сообщение и ничего не скачивает.
+Наборы: `app`, `styles`, `appearance`, `poses`, `regressions`, `surfaces`, `face_details`, `fit`, `all` (по умолчанию). Можно задать переменную `BLENDER_BIN` вместо аргумента. Если Blender отсутствует, скрипт выдаёт сообщение и ничего не скачивает.
 
 На macOS путь должен вести к исполняемому файлу внутри приложения, например `/Applications/Blender.app/Contents/MacOS/Blender`. На Windows передай путь к `blender.exe`, на Linux — путь к бинарнику или `blender`, если он есть в PATH.
 
@@ -54,10 +54,42 @@ python3 scripts/test_blender.py --blender "/path/to/blender" --suite poses
 python3 scripts/build_addon.py
 ```
 
-Результат: `dist/chibi_generator_v0.8.0.zip` и файл `.sha256`. Установка ожидает один каталог `chibi_generator/` в корне ZIP. Для нового релиза обнови версию, документацию, changelog и пакет в `releases/`.
+Результат: `dist/chibi_generator_v0.9.1.zip` и файл `.sha256`. Установка ожидает один каталог `chibi_generator/` в корне ZIP. Для нового релиза обнови версию, документацию, changelog и пакет в `releases/`.
+
+После изменения кода обнови установочный пакет командой `python3 scripts/build_addon.py --output releases` перед проверкой репозитория. Проверка сравнивает текущий релиз с исходниками; исторические архивы проверяются только на целостность и контрольную сумму.
 
 ## Проверка внешнего вида
 
 После изменения геометрии проверь стоячий персонаж спереди, сбоку и сзади, крайние значения параметров и повторное переключение. Для кистей нужны крупные планы ладони, кулака и двух раздельных пальцев; для поз — отражённая версия и контакт стоп. Новые превью должны соответствовать сохранённым пресетам.
 
-Публичные галереи показывают текущий стиль и примеры выпусков. Галерея персонажей/волос была создана до переработки кистей; актуальные кисти и позы показаны отдельными изображениями. Перед сменой формата JSON сохрани совместимость с отсутствующими полями и протестируй fixture.
+Публичные галереи содержат примеры разных выпусков. Актуальные лица, волосы и кисти показаны в `CHARACTER_POLISH.md`; старые каталоги одежды сохраняются как примеры ассортимента. Перед сменой формата JSON сохрани совместимость с отсутствующими полями и протестируй fixture.
+
+
+## Рендеры материалов
+
+Сравнение трёх полностью одетых персонажей с фиксированными параметрами:
+
+```sh
+"/path/to/blender" --background --factory-startup --python-exit-code 1 --python scripts/render_material_study.py -- --output build/material-study
+```
+
+Код рендера удаляет объекты только из этой отдельной фоновой сцены. Не запускай его через редактор Python в открытой рабочей сцене.
+
+## Эталонные персонажи и миниатюры
+
+```sh
+"/path/to/blender" --background --factory-startup --python-exit-code 1 --python scripts/render_character_study.py
+"/path/to/blender" --background --factory-startup --python-exit-code 1 --python scripts/render_hand_study.py
+"/path/to/blender" --background --factory-startup --python-exit-code 1 --python scripts/render_previews.py
+```
+
+Все три команды предназначены для отдельных фоновых сцен. Первый скрипт сохраняет три JSON и виды `hero`, `front`, `side`, `back`, `portrait`; для выборочного повтора используй `-- --looks grunge --views side portrait`. Второй показывает ладонь, ногти, кулак и V-жест. Третий создаёт 36 миниатюр в `build/previews/`; после визуальной проверки их можно перенести в `chibi_generator/assets/previews/`. Скрипты не устанавливают программы и не меняют открытый в Blender проект.
+
+## Посадка одежды
+
+```sh
+"/path/to/blender" --background --factory-startup --python-exit-code 1 --python scripts/render_fit_study.py
+python3 scripts/test_blender.py --blender "/path/to/blender" --suite fit
+```
+
+Рендер сохраняет шесть JSON и три ракурса каждого образа. Набор `fit` проверяет связность брюк, непрерывность деформации в центре, веса, повторное применение и выборочную посадку рукавов/брюк на четырёх телах в четырёх позах. Это отдельная проверка от десяти поз и отражений в `poses`. См. [границы проверки](BODY_FIT.md).

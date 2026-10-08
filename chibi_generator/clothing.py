@@ -6,6 +6,8 @@ from math import pi,sin,cos,sqrt
 
 class Mesh:
     def __init__(self):self.v=[];self.f=[]
+    def append(self,other):
+        offset=len(self.v);self.v.extend(other.v);self.f.extend(tuple(offset+i for i in face) for face in other.f);return self
     def loft(self,rings,seg=64,caps=False,power=2):
         offset=len(self.v)
         for x,y,z,rx,ry in rings:
@@ -37,26 +39,47 @@ class Mesh:
         ob.parent=rig;ob['chibi_asset']=name;ob['chibi_part']=part;ob['chibi_section']='04 Outfit';ob['chibi_slot']=slot;ob['chibi_option']=option
         return ob
 
+def union_surface(ob,voxel=.003,iterations=3):
+    """Bake overlapping closed volumes into a single editable outer surface."""
+    old=bpy.context.view_layer.objects.active;bpy.context.view_layer.objects.active=ob
+    rem=ob.modifiers.new('Joined garment surface','REMESH');rem.mode='VOXEL';rem.voxel_size=voxel;rem.use_smooth_shade=True
+    bpy.ops.object.modifier_apply(modifier=rem.name)
+    # Voxel union can leave tiny enclosed islands where three caps overlap.
+    # Remove only voxel-scale debris; substantial disconnected panels are bugs.
+    bm=bmesh.new();bm.from_mesh(ob.data);seen=set();islands=[]
+    for root in bm.verts:
+        if root in seen:continue
+        stack=[root];island=[]
+        while stack:
+            v=stack.pop()
+            if v in seen:continue
+            seen.add(v);island.append(v);stack.extend(e.other_vert(v) for e in v.link_edges)
+        islands.append(island)
+    debris=[v for island in islands if len(island)<=32 for v in island]
+    if debris:bmesh.ops.delete(bm,geom=debris,context='VERTS')
+    bm.to_mesh(ob.data);bm.free()
+    sm=ob.modifiers.new('Soft sewn transition','SMOOTH');sm.factor=.55;sm.iterations=iterations
+    bpy.ops.object.modifier_apply(modifier=sm.name);bpy.context.view_layer.objects.active=old
+    for p in ob.data.polygons:p.use_smooth=True
+
 def interpolate(profile,steps=4):
     rings=[]
     for a,b in zip(profile,profile[1:]):
         for i in range(steps):t=i/steps;rings.append(tuple(x*(1-t)+y*t for x,y in zip(a,b)))
     return rings+[profile[-1]]
 
-def fabric(name,color,rough=.8,metal=0):
+def fabric(name,color,rough=None,metal=0,surface='cloth'):
+    from . import surfaces
     m=bpy.data.materials.new(name);m.diffuse_color=(*color,1);m.use_nodes=True
-    bs=m.node_tree.nodes.get('Principled BSDF');bs.inputs['Base Color'].default_value=(*color,1);bs.inputs['Roughness'].default_value=rough;bs.inputs['Metallic'].default_value=metal
-    if not metal:
-        noise=m.node_tree.nodes.new('ShaderNodeTexNoise');noise.inputs['Scale'].default_value=230;noise.inputs['Detail'].default_value=2
-        bump=m.node_tree.nodes.new('ShaderNodeBump');bump.inputs['Strength'].default_value=.13;bump.inputs['Distance'].default_value=.0015
-        m.node_tree.links.new(noise.outputs['Fac'],bump.inputs['Height']);m.node_tree.links.new(bump.outputs['Normal'],bs.inputs['Normal'])
+    bs=m.node_tree.nodes.get('Principled BSDF');bs.inputs['Base Color'].default_value=(*color,1);bs.inputs['Metallic'].default_value=metal
+    surfaces.configure(m,'metal' if metal else surface,rough)
     return m
 
 def create(col,rig):
     """Create only neutral geometry; binding and morph keys are managed by scene.py."""
     created=[]
-    dark=fabric('Wardrobe • washed charcoal',(.032,.030,.046));lilac=fabric('Wardrobe • lilac fleece',(.31,.16,.46));light=fabric('Wardrobe • oat knit',(.68,.60,.52));stripe=fabric('Wardrobe • mulberry stripe',(.20,.055,.26))
-    denim=fabric('Wardrobe • black denim',(.018,.025,.037));seam=fabric('Wardrobe • grey stitch',(.15,.16,.19));rubber=fabric('Wardrobe • ivory rubber',(.54,.51,.58),.72);silver=fabric('Wardrobe • silver',(.55,.59,.66),.28,.8)
+    dark=fabric('Wardrobe • washed charcoal',(.032,.030,.046));lilac=fabric('Wardrobe • lilac fleece',(.31,.16,.46));light=fabric('Wardrobe • oat knit',(.68,.60,.52),surface='knit');stripe=fabric('Wardrobe • mulberry stripe',(.20,.055,.26),surface='knit')
+    denim=fabric('Wardrobe • black denim',(.018,.025,.037),surface='denim');seam=fabric('Wardrobe • grey stitch',(.15,.16,.19));rubber=fabric('Wardrobe • ivory rubber',(.54,.51,.58),.72,surface='rubber');silver=fabric('Wardrobe • silver',(.55,.59,.66),.28,.8)
     # All sweater pieces use the same local Z stripe pattern, including sleeves.
     nodes=light.node_tree.nodes;links=light.node_tree.links
     coords=nodes.new('ShaderNodeTexCoord');xyz=nodes.new('ShaderNodeSeparateXYZ');links.new(coords.outputs['Object'],xyz.inputs[0])

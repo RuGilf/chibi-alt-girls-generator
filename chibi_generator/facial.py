@@ -34,7 +34,16 @@ def morph(points,face,asset,part,makeup):
         if name.startswith('Winged liner'):
             outer=side*(q[:,0]-cx)-.076;scale=model.MAKEUP_PRESETS[makeup['preset']][-2]
             q[:,0]=cx+side*(.076+outer*scale);x=q[:,0]-cx
-        scale=face['eye_size'];height=.91 if face['expression']=='dreamy' else 1.03 if face['expression']=='cheerful' else 1
+        scale=face['eye_size'];height=.91 if face['expression']=='dreamy' else 1.03 if face['expression'] in ('cheerful','wink') else 1
+        if face['expression']=='wink' and side==1:
+            if name.startswith('Upper eyeliner'):
+                # Translate each tube ring rather than flattening its cross-section.
+                centers=old.reshape(-1,10,3).mean(axis=1)
+                local_z=old[:,2]-np.repeat(centers[:,2],10)
+                u=np.repeat((centers[:,0]-cx)/.080,10)
+                z=local_z+.006*u*u-.003
+            else:z=z*.20+.004*((x/.076)**2-.35)
+            height=1
         angle=side*face['eye_tilt']*.15
         q[:,0]=cx+side*face['eye_spacing']*.012+scale*(x*np.cos(angle)-z*np.sin(angle))
         q[:,2]=cz+scale*(x*np.sin(angle)+z*np.cos(angle)*height)
@@ -42,14 +51,25 @@ def morph(points,face,asset,part,makeup):
         side=1 if q[:,0].mean()>0 else -1;cx=side*.128
         q[:,0]+=side*face['eye_spacing']*.012
         outer=side*(q[:,0]-cx)/.06
-        q[:,2]+=face['eye_tilt']*.006*outer
-        if face['expression']=='cheerful':q[:,2]+=.006+.004*(1-outer**2)
+        q[:,2]+=face['eye_tilt']*.006*outer+face.get('brow_height',0)*.016+face.get('brow_arch',0)*.010*np.maximum(0,1-outer**2)
+        if face['expression'] in ('cheerful','wink'):q[:,2]+=.006+.004*(1-outer**2)
         elif face['expression']=='serious':q[:,2]+=.006*outer-.004
         elif face['expression']=='dreamy':q[:,2]-=.004
     elif name.startswith(('Quiet rose smile','Lower lip highlight','Lip colour layer')):
+        if name.startswith('Quiet rose smile'):
+            centers=old.reshape(-1,8,3).mean(axis=1)
+            q[:,2]+=np.repeat(1.412+.0015*(centers[:,0]/.035)**2-centers[:,2],8)
         u=np.clip(q[:,0]/.035,-1.25,1.25)
-        if face['expression']=='cheerful':q[:,2]+=.007*u*u-.0015
+        q[:,0]*=1+.30*face.get('mouth_width',0)
+        q[:,2]=1.412+(q[:,2]-1.412)*(1+.45*face.get('lip_fullness',0))
+        if face['expression'] in ('cheerful','wink'):q[:,2]+=.010*u*u-.0025
         elif face['expression']=='serious':q[:,2]-=.004*u*u-.001
+    elif name.startswith('Button nose'):
+        center=(q[:,2].min()+q[:,2].max())*.5
+        q[:,0]*=1+.30*face.get('nose_width',0)
+        q[:,2]=center+(q[:,2]-center)*(1+.15*face.get('nose_projection',0))
+        depth=old[:,1]-face_y(old[:,0],old[:,2])
+        q[:,1]=face_y(q[:,0],q[:,2])+depth*(1+.45*face.get('nose_projection',0))
     # Reproject facial features onto their new position before changing the head silhouette.
     if eye or name.startswith(('Brow','Quiet rose smile','Lower lip highlight','Lip colour layer')):
         q[:,1]+=face_y(q[:,0],q[:,2])-face_y(old[:,0],old[:,2])
@@ -106,6 +126,32 @@ def own_materials(objects):
                 if original.name not in owned:owned[original.name]=original.copy()
                 slot.material=owned[original.name]
 
+def detail_materials(objects,rig):
+    """Lip details must not recolor the shared lower-lid or nose materials."""
+    for ob in objects:
+        role=ob.get('chibi_asset','').split('.')[0]
+        if role not in ('Quiet rose smile','Lower lip highlight'):continue
+        source=ob.data.materials[0]
+        if source.get('chibi_lip_detail')==role and source.get('chibi_lip_owner')==rig['chibi_character_id']:continue
+        mat=source.copy();mat['chibi_lip_detail']=role;mat['chibi_lip_owner']=rig['chibi_character_id'];ob.data.materials[0]=mat
+        bs=mat.node_tree.nodes.get('Principled BSDF')
+        for link in list(mat.node_tree.links):
+            if link.to_socket==bs.inputs['Base Color']:mat.node_tree.links.remove(link)
+        tone=mat.node_tree.nodes.get('Chibi skin tone')
+        if tone and not tone.outputs[0].links:mat.node_tree.nodes.remove(tone)
+        if source.users==0 and not source.use_fake_user:bpy.data.materials.remove(source)
+
+def visibility(objects,spec):
+    """Cosmetic layers own their visibility, independently from wardrobe caches."""
+    hidden=spec['makeup']['freckles']<=.001
+    for ob in objects:
+        name=ob.get('chibi_asset','').split('.')[0]
+        if name=='Freckle colour layer':
+            ob.hide_render=hidden;ob.hide_viewport=hidden
+        elif name.startswith(('Almond sclera','Large violet iris','Pupil','Main catchlight','Secondary catchlight','Lower lid')):
+            closed=spec['face']['expression']=='wink' and name.endswith(' 1')
+            ob.hide_render=closed;ob.hide_viewport=closed
+
 def paint(ob,points,spec):
     face=spec['face'];cosmetics=spec['makeup'];name=ob['chibi_asset'];preset=model.MAKEUP_PRESETS[cosmetics['preset']]
     _,shadow,shadow_strength,blush,blush_strength,lip,lip_strength,wing,freckles=preset
@@ -131,8 +177,10 @@ def paint(ob,points,spec):
         light=np.array(model.EYE_COLORS[face['eye_color']]);dark=light*.16
         f=(1-t)*.85+.10;rgb=(dark[None,:]*(1-f[:,None])+light[None,:]*f[:,None])*(1-.76*edge[:,None])*(.94+.06*np.cos(np.arctan2(z/.049,x/.043)*28))[:,None]
         ob.data.color_attributes['IrisPaint'].data.foreach_set('color',np.column_stack((rgb,np.ones(len(rgb)))).ravel())
-    elif name.startswith('Lip colour layer'):
+    elif name.startswith(('Lip colour layer','Quiet rose smile','Lower lip highlight')):
         color=base*(1-lip_strength**.5*intensity)+np.array(lip)*lip_strength**.5*intensity
+        if name.startswith('Quiet rose smile'):color*=.55
+        elif name.startswith('Lower lip highlight'):color=color*.65+base*.35
         bs=ob.data.materials[0].node_tree.nodes.get('Principled BSDF');bs.inputs['Base Color'].default_value=(*color,1)
         bs.inputs['Roughness'].default_value=.36 if cosmetics['preset'] in ('rose','peach','sunset') else .52
     elif name.startswith('Freckle colour layer'):
