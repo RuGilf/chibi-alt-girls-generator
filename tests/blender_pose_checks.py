@@ -43,7 +43,9 @@ for side in ('L','R'):
         v=stack.pop()
         if v in seen:continue
         seen.add(v);stack.extend(e.other_vert(v) for e in v.link_edges)
-    assert len(seen)==len(bm.verts);bm.free()
+    assert len(seen)==len(bm.verts)
+    assert len(bm.verts)-len(bm.edges)+len(bm.faces)==2,'Unwanted finger bridge or tunnel'
+    bm.free()
     assert len([o for o in c.objects if o.get('chibi_hand')==side and o.get('chibi_digit')])==5
 for preset in model.POSE_PRESETS:
     for mirror in (False,True):

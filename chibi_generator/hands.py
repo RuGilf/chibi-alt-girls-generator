@@ -43,7 +43,7 @@ def make(col,rig):
             for joint,(a,b) in enumerate(zip(points,points[1:])):
                 a,b=Vector(a),Vector(b)
                 for k in range(6):
-                    path.append(a.lerp(b,k/6));radii.append(r*(1.12-.22*(joint+k/6)/3))
+                    path.append(a.lerp(b,k/6));radii.append(r*(1.0-.10*(joint+k/6)/3))
             path.append(Vector(points[-1]));radii.append(r*.90)
             m.tube(path,radii,seg=20,flatten=.91)
             for p,radius in ((path[0],radii[0]),(path[-1],radii[-1])):

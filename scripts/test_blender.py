@@ -5,7 +5,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 SUITES = {'app': 'blender_app_checks.py', 'styles': 'blender_style_checks.py',
           'appearance': 'blender_appearance_checks.py', 'poses': 'blender_pose_checks.py',
-          'regressions': 'blender_regression_checks.py', 'surfaces': 'blender_surface_checks.py', 'face_details': 'blender_face_detail_checks.py'}
+          'regressions': 'blender_regression_checks.py', 'surfaces': 'blender_surface_checks.py', 'face_details': 'blender_face_detail_checks.py', 'fit': 'blender_fit_checks.py'}
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)

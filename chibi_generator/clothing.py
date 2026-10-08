@@ -44,6 +44,20 @@ def union_surface(ob,voxel=.003,iterations=3):
     old=bpy.context.view_layer.objects.active;bpy.context.view_layer.objects.active=ob
     rem=ob.modifiers.new('Joined garment surface','REMESH');rem.mode='VOXEL';rem.voxel_size=voxel;rem.use_smooth_shade=True
     bpy.ops.object.modifier_apply(modifier=rem.name)
+    # Voxel union can leave tiny enclosed islands where three caps overlap.
+    # Remove only voxel-scale debris; substantial disconnected panels are bugs.
+    bm=bmesh.new();bm.from_mesh(ob.data);seen=set();islands=[]
+    for root in bm.verts:
+        if root in seen:continue
+        stack=[root];island=[]
+        while stack:
+            v=stack.pop()
+            if v in seen:continue
+            seen.add(v);island.append(v);stack.extend(e.other_vert(v) for e in v.link_edges)
+        islands.append(island)
+    debris=[v for island in islands if len(island)<=32 for v in island]
+    if debris:bmesh.ops.delete(bm,geom=debris,context='VERTS')
+    bm.to_mesh(ob.data);bm.free()
     sm=ob.modifiers.new('Soft sewn transition','SMOOTH');sm.factor=.55;sm.iterations=iterations
     bpy.ops.object.modifier_apply(modifier=sm.name);bpy.context.view_layer.objects.active=old
     for p in ob.data.polygons:p.use_smooth=True

@@ -1,0 +1,69 @@
+{
+  "accessories": [],
+  "age": 25,
+  "appearance": "approved_orchid_bob_v1",
+  "body": {
+    "breast_size": 1,
+    "calf_size": 1,
+    "curve_direction": 1,
+    "curve_severity": 1,
+    "glute_size": 1,
+    "height": 1,
+    "leg_asymmetry": 0.1,
+    "shoulder_tilt": 0.02,
+    "thigh_size": 1
+  },
+  "curvature_probability": 0.04,
+  "face": {
+    "brow_arch": -0.2,
+    "brow_height": 0.18,
+    "cheeks": 0.65,
+    "chin": -0.55,
+    "expression": "calm",
+    "eye_color": "rose",
+    "eye_size": 1.07,
+    "eye_spacing": 0.2,
+    "eye_tilt": -0.12,
+    "jaw": 0.3,
+    "lip_fullness": 0.4,
+    "mouth_width": 0.1,
+    "nose_projection": -0.2,
+    "nose_width": -0.25,
+    "preset": "round",
+    "width": 0.35
+  },
+  "generator_version": "0.9.1",
+  "hair": {
+    "color": "burgundy",
+    "pattern": "solid",
+    "preset": "short_bob",
+    "secondary": "pink"
+  },
+  "makeup": {
+    "freckles": 0,
+    "intensity": 1.0,
+    "preset": "natural"
+  },
+  "outfit": {
+    "bottom": "shorts",
+    "dress": "none",
+    "legwear": "bare",
+    "palette": "default",
+    "shoes": "boots",
+    "top": "corset"
+  },
+  "pose": {
+    "left": "auto",
+    "mirror": false,
+    "preset": "hip",
+    "right": "auto"
+  },
+  "schema_version": 1,
+  "seed": 720,
+  "skin": {
+    "preset": "peach",
+    "shade": 0,
+    "undertone": 0
+  },
+  "style": {}
+}

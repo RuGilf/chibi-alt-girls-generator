@@ -11,7 +11,9 @@ def deform(points,body,part='body'):
     p=np.array(points,dtype=np.float64,copy=True).reshape(-1,3)
     x,y,z=p[:,0].copy(),p[:,1].copy(),p[:,2].copy()
     if part in ('leg','pants'):
-        side=np.clip(x/.08,-1.,1.) if part=='pants' else np.where(x>=0,1.,-1.)
+        # Blend only across the joined centre seam. A wide blend shrinks the
+        # inner trouser legs relative to skin on large/asymmetric thighs.
+        side=np.clip(x/.008,-1.,1.) if part=='pants' else np.where(x>=0,1.,-1.)
         center=np.interp(z,[.20,.40,.51,.62,.75],[.105,.102,.097,.091,.082])*side
         thigh=np.exp(-((z-.64)/.18)**2)
         calf=np.exp(-((z-.405)/.145)**2)

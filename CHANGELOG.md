@@ -1,5 +1,16 @@
 # Изменения
 
+## 0.9.1 — 2026-10-08
+
+- Continuous shoulder-to-finger meshes remove the wrist seam; shared arm weights keep sleeves and skin aligned.
+- Narrower finger roots remove a small unwanted bridge between ring finger and pinky; topology checks now reject tunnels.
+- Joined trouser and shorts surfaces replace overlapping hip/leg panels; continuous asymmetric deformation removes the crotch split.
+- Narrow centre-seam blending preserves inner-leg coverage on large asymmetric thighs.
+- Softer knee profiles, subtle sleeve folds and inward skirt thickness.
+- Trouser outseams, pocket welts and fly stitching conform to the finished surface.
+- Lazy geometry migration preserves old presets; new body-fit reference renders and reproducible presets.
+
+
 ## 0.9.0
 
 - Шесть настроек носа, губ и бровей; обновлены шесть пресетов лица.
