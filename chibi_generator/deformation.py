@@ -10,8 +10,8 @@ def deform(points,body,part='body'):
     """Input/output: neutral character coordinates, independent of root placement."""
     p=np.array(points,dtype=np.float64,copy=True).reshape(-1,3)
     x,y,z=p[:,0].copy(),p[:,1].copy(),p[:,2].copy()
-    if part=='leg':
-        side=np.where(x>=0,1.,-1.)
+    if part in ('leg','pants'):
+        side=np.clip(x/.08,-1.,1.) if part=='pants' else np.where(x>=0,1.,-1.)
         center=np.interp(z,[.20,.40,.51,.62,.75],[.105,.102,.097,.091,.082])*side
         thigh=np.exp(-((z-.64)/.18)**2)
         calf=np.exp(-((z-.405)/.145)**2)
@@ -20,12 +20,15 @@ def deform(points,body,part='body'):
         scale=1+limb*((body['thigh_size']-.5)*.70*thigh+(body['calf_size']-.5)*.46*calf+side*body['leg_asymmetry'])
         x=center+(x-center)*scale
         y=y*(1+(scale-1)*.84)
+        # A shared hip field prevents an abrupt step where trousers join the pelvis.
+        blend=smooth(.70,.81,z);hip=1+(body['thigh_size']-.5)*.15
+        x=x*(1-blend)+p[:,0]*hip*blend;y=y*(1-blend)+p[:,1]*hip*blend
     elif part in ('skirt','hip'):
         hip=1+(body['thigh_size']-.5)*.15
         x*=hip;y*=hip
     # Garments use the same field as the body. Front is -Y; back is +Y.
     # Keep shoulders, neck, waist, hands and footwear outside these volume fields.
-    if part in ('body','hip','skirt','leg'):
+    if part in ('body','hip','skirt','leg','pants'):
         if part=='body':
             front=smooth(.008,.075,-y)
             chest_z=np.exp(-((z-1.085)/.079)**2)*smooth(.965,1.015,z)*(1-smooth(1.165,1.215,z))

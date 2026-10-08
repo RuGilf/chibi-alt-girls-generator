@@ -1,8 +1,8 @@
 """Continuous chibi hands, explicit finger skinning and attached short nails."""
 import bpy,math,numpy as np
 from mathutils import Vector
-from . import clothing
-REVISION=5
+from . import clothing,anatomy
+REVISION=6
 FINGERS=('index','middle','ring','pinky')
 # Root x, total length and relaxed spread; palm is centered at x=.309.
 DIGITS=[(-.024,.061,-.004),(-.007,.068,0),(.010,.062,.003),(.026,.049,.006)]
@@ -30,8 +30,10 @@ def make(col,rig):
     nailmat=clothing.fabric('Short lilac manicure',(.31,.16,.46),.30,surface='vinyl')
     for side,sign in [('L',1),('R',-1)]:
         m=clothing.Mesh();_sphere(m,(sign*.309,-.014,.824),(.039,.0225,.035))
-        # Narrow wrist, rounded knuckles, fleshy thumb root.
-        _sphere(m,(sign*.302,-.014,.847),(.031,.028,.040))
+        # The arm and wrist are unioned with the palm, so no overlapping wrist seam remains.
+        arm=anatomy.profile(anatomy.ARM_PROFILE);arm[:,0]*=sign
+        m.tube(arm[:,:3],arm[:,3].tolist(),32,.88)
+        _sphere(m,arm[0,:3],(.035,.032,.029))
         _sphere(m,(sign*.282,-.014,.816),(.019,.023,.026))
         for name in (*FINGERS,'thumb'):
             points=finger_points(side,name);r=.0072 if name!='pinky' else .0068
@@ -46,7 +48,7 @@ def make(col,rig):
             m.tube(path,radii,seg=20,flatten=.91)
             for p,radius in ((path[0],radii[0]),(path[-1],radii[-1])):
                 _sphere(m,p,(radius,radius*.91,radius),20,14)
-        ob=m.object('Chibi unified hand '+side,mat,col,rig,'hands','unified','arm');del ob['chibi_slot'];del ob['chibi_option'];ob['chibi_section']='01 Body';ob['chibi_hand']=side;ob['chibi_hand_rev']=REVISION
+        ob=m.object('Chibi continuous arm and hand '+side,mat,col,rig,'hands','unified','arm');del ob['chibi_slot'];del ob['chibi_option'];ob['chibi_section']='01 Body';ob['chibi_hand']=side;ob['chibi_hand_rev']=REVISION;ob['chibi_continuous_arm']=True
         # Voxel union removes intersections between palm and digits, producing one skin surface.
         old=bpy.context.view_layer.objects.active;bpy.context.view_layer.objects.active=ob;ob.select_set(True)
         rem=ob.modifiers.new('Continuous hand surface','REMESH');rem.mode='VOXEL';rem.voxel_size=.0015;rem.use_smooth_shade=True
@@ -70,32 +72,15 @@ def ensure(col,rig):
 
 def visibility(objects):
     for ob in objects:
-        legacy=ob.get('chibi_asset','').startswith(('Palm','Rounded finger','Thumb','Short nail'))
+        legacy=ob.get('chibi_asset','').startswith(('Palm','Rounded finger','Thumb','Short nail','Underlying arm'))
         if legacy:ob.hide_render=True;ob.hide_viewport=True
         elif ob.get('chibi_hand'):ob.hide_render=ob.get('chibi_hand_rev')!=REVISION;ob.hide_viewport=ob.hide_render
 
-def wrist_weights(z,side):
-    t=min(1,max(0,(z-.840)/.045));t=t*t*(3-2*t)
-    return {f'hand.{side}':1-t,f'forearm.{side}':t}
-
-def bind_wrist(ob,points):
-    """Both surfaces use the same weights across their overlapping wrist area."""
-    if ob.get('chibi_wrist_rev')==REVISION:return
-    side='L' if points[:,0].mean()>0 else 'R'
-    for vertex,p in zip(ob.data.vertices,points):
-        if p[2]>=.91:continue
-        blend=min(1,max(0,(.91-p[2])/.025))
-        weights={ob.vertex_groups[g.group].name:g.weight*(1-blend) for g in vertex.groups}
-        for name,value in wrist_weights(p[2],side).items():weights[name]=weights.get(name,0)+blend*value
-        total=sum(weights.values())
-        for group_index in [g.group for g in vertex.groups]:ob.vertex_groups[group_index].remove([vertex.index])
-        for name,value in weights.items():
-            if value>1e-7:ob.vertex_groups[name].add([vertex.index],value/total,'REPLACE')
-    ob['chibi_wrist_rev']=REVISION
-
 def bind(ob,rig):
     side=ob['chibi_hand'];pts=np.array([v.co[:] for v in ob.data.vertices]);ob.vertex_groups.clear()
-    names=[f'hand.{side}',f'forearm.{side}']+[f'{f}{j}.{side}' for f in (*FINGERS,'thumb') for j in (1,2,3)]
+    arm_names=[f'{name}.{side}' for name in ('clavicle','upper_arm','forearm','hand')]
+    names=arm_names+[f'{f}{j}.{side}' for f in (*FINGERS,'thumb') for j in (1,2,3)]
+    arm_weights=anatomy.arm_weights(pts)
     groups={n:ob.vertex_groups.new(name=n) for n in names}
     digit_names=(*FINGERS,'thumb');distances=[]
     for digit in digit_names:
@@ -111,7 +96,7 @@ def bind(ob,rig):
         # Every distal vertex belongs to its own digit; neighbouring fingers cannot pull it.
         for i,p in enumerate(pts):
             if p[2]>.840:
-                w=wrist_weights(p[2],side)
+                w=dict(zip(arm_names,arm_weights[i]))
             else:
                 if p[2]<.783:prob=np.eye(5)[closest[i]]
                 else:

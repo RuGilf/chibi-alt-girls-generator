@@ -2,8 +2,8 @@
 import math
 import bpy
 from math import sin,cos,pi,sqrt
-from . import model,clothing
-REVISION=3
+from . import model,clothing,anatomy,fitting
+REVISION=4
 Mesh=clothing.Mesh
 interpolate=clothing.interpolate
 COLORS={'black':(.014,.013,.022),'charcoal':(.035,.039,.050),'burgundy':(.19,.018,.043),'pink':(.65,.23,.40),'lilac':(.36,.18,.52),'cyan':(.04,.46,.52),'acid':(.25,.80,.045),'ivory':(.72,.65,.57),'denim':(.025,.040,.065),'blue':(.075,.16,.26),'olive':(.105,.115,.055),'moss':(.10,.20,.14),'brown':(.12,.065,.043),'mustard':(.48,.28,.055),'gold':(.52,.32,.09),'silver':(.55,.59,.66),'skin':(.66,.36,.265)}
@@ -53,7 +53,8 @@ class Builder:
     def obj(self,mesh,name,mat=None,part=None,smooth=True):
         part=part or ('skirt' if self.slot=='bottom' else 'leg' if self.slot=='shoes' else 'body')
         ob=mesh.object('Wardrobe • '+self.key+' • '+name,mat or self.main,self.col,self.rig,self.slot,self.key,part,smooth);ob['chibi_factory_v2']=True;ob['chibi_recipe_rev']=REVISION;self.objects.append(ob);return ob
-    def tube(self,name,pts,r=.002,mat=None,part=None,seg=8):return self.obj(Mesh().tube(pts,r,seg),name,mat,part)
+    def tube(self,name,pts,r=.002,mat=None,part=None,seg=8):
+        ob=self.obj(Mesh().tube(pts,r,seg),name,mat,part);ob['chibi_tube_sides']=seg;ob['chibi_tube_radius']=r;return ob
     def ring(self,name,z,rx,ry,mat=None,part=None,cx=0,cy=0,r=.002):
         return self.tube(name,[(cx+rx*cos(2*pi*j/64),cy+ry*sin(2*pi*j/64),z) for j in range(65)],r,mat,part)
     def surface(self,name,profile,mat=None,part=None,seg=64,caps=True):
@@ -92,6 +93,7 @@ class Builder:
                 t=i/(len(pts)-1);r=(.062+.013*sin(pi*t)-.016*t)*(.65+.35*min(1,t/.12))
                 if puff:r+=.020*sin(pi*t)**2
                 if bell:r+=.018*t**3
+                if mode!='short':r+=.0008*sin(24*pi*t)*sin(pi*t)**2
                 rs.append(r)
             self.obj(Mesh().tube(pts,rs,24,.90),'sleeve '+str(side),mat or self.main,'arm')
             if mode!='short':self.tube('cuff '+str(side),[controls[-1],(side*.303,-.016,.851)],.048 if not bell else .067,self.accent,'arm',24)
@@ -166,7 +168,8 @@ class Builder:
                 a=2*pi*j/seg;wave=1+.025*sin(pleats*a)*t*t;zz=z+(.035*sin(3*a)*t*t if c.get('asymmetric') else 0);m.v.append((rx*cos(a)*wave,ry*sin(a)*wave,zz))
         for i in range(rows-1):
             for j in range(seg):a=i*seg+j;b=i*seg+(j+1)%seg;m.f.append((a,b,b+seg,a+seg))
-        self.obj(m,'skirt shell',part='skirt');self.surface('waistband',[(0,0,.913,.155,.109),(0,0,.944,.150,.105)],self.dark,'skirt',caps=False)
+        ob=self.obj(m,'skirt shell',part='skirt');sol=ob.modifiers.new('Fabric hem thickness','SOLIDIFY');sol.thickness=.0015;sol.offset=-1
+        self.surface('waistband',[(0,0,.913,.155,.109),(0,0,.944,.150,.105)],self.dark,'skirt',caps=False)
         hempts=[]
         for j in range(97):
             a=2*pi*j/96;wave=1+.025*sin(pleats*a);hempts.append((flare*cos(a)*wave,.66*flare*sin(a)*wave,bottom+.004+(.035*sin(3*a) if c.get('asymmetric') else 0)))
@@ -178,7 +181,7 @@ class Builder:
             # Overlapping flounce bands create a tiered silhouette.
             self.surface('tier flounce',[(0,0,z+.035,rx-.003,ry-.003),(0,0,z-.020,rx+.016,ry+.012)],self.accent,'skirt',caps=False)
     def build_pants(self):
-        c=self.cfg;width=c.get('width',.07)
+        c=self.cfg;width=c.get('width',.07);hem=c.get('length',.18)
         hip=Mesh();seg=96;rows=21;rxleg=max(width*1.17,.081);ryleg=max(rxleg*.91,.078);cx=.080
         for i in range(rows):
             t=i/(rows-1);z=.778+.162*t;blend=min(1,t/.82);blend=blend*blend*(3-2*blend)
@@ -189,15 +192,17 @@ class Builder:
                 r=union*(1-blend)+oval*blend;hip.v.append((r*cc,r*ss,z))
         for i in range(rows-1):
             for j in range(seg):a=i*seg+j;b=i*seg+(j+1)%seg;hip.f.append((a,b,b+seg,a+seg))
-        self.obj(hip,'joined trouser hips',part='hip')
+        hip.f.extend([tuple(reversed(range(seg))),tuple((rows-1)*seg+j for j in range(seg))]);garment=hip
         self.surface('belt',[(0,0,.913,.154,.109),(0,0,.944,.151,.107)],self.dark,'hip',caps=False)
         for side in (-1,1):
             profile=[]
             for z,center,mult,minrx,minry in ((.18,.105,.92,.051,.054),(.25,.105,1,.055,.056),(.40,.102,1,.059,.059),(.51,.097,1.04,.064,.062),(.62,.091,1.10,.071,.069),(.75,.082,1.17,.080,.077),(.81,.080,1.17,.081,.078)):
+                if z<hem:continue
                 rx=max(width*mult,minrx);ry=max(rx*.91,minry)
                 if z<.4 and self.shoe_height>.30:rx=min(rx,.042);ry=min(ry,.045)
                 profile.append((side*center,0,z,rx,ry))
-            self.surface('trouser leg '+str(side),profile,part='leg',seg=48,caps=False)
+            if hem>.18:profile.insert(0,(side*.091,0,hem,max(width*1.10,.080),max(width,.077)))
+            garment.append(Mesh().loft(anatomy.profile(profile).tolist(),48,True))
             # A sewn outseam and angled pocket welt.
             self.tube('outseam',[(x+side*(rx+.001),y,z) for x,y,z,rx,ry in interpolate(profile,3)],.0009,self.accent,'leg',6)
             self.tube('pocket welt',[(side*.045,-.112,.916),(side*.095,-.105,.88),(side*.145,-.075,.86)],.0014,self.accent,'hip')
@@ -216,7 +221,9 @@ class Builder:
             if c.get('patches'):
                 x=side*.097;z=.43 if side<0 else .62;ry=width*1.05
                 self.panel('denim sewn patch',[(x-.026,-ry-.004,z-.035),(x+.026,-ry-.004,z-.035),(x+.026,-ry-.004,z+.035),(x-.026,-ry-.004,z+.035)],self.accent,'leg')
+        ob=self.obj(garment,'continuous trousers',part='pants');clothing.union_surface(ob);ob['chibi_continuous_pants']=True
         self.tube('fly stitching',[(.007,-.123,z) for z in (.79,.83,.87,.91)],.001,self.accent,'hip')
+        fitting.conform_trims(ob,self.objects,('outseam','pocket welt','fly stitching'))
         if c.get('chains'):self.chain(.90,.16)
     def build_dress(self):
         c=self.cfg;self.torso(.91);self.sleeves(puff=c.get('puff',False),bell=c.get('bell',False))
@@ -332,7 +339,7 @@ def ensure_base(col,rig):
     for side in (-1,1):
         pts=interpolate([(side*.162,.005,1.165),(side*.211,.005,1.130),(side*.254,.002,1.030),(side*.291,-.01,.915),(side*.302,-.015,.858)],8)
         obj(Mesh().tube(pts,[.038-.011*i/(len(pts)-1) for i in range(len(pts))],24,.88),'Underlying arm '+str(side),'arm')
-        ob=obj(Mesh().loft(interpolate([(side*.105,0,.12,.043,.046),(side*.105,0,.20,.047,.049),(side*.105,0,.28,.048,.049),(side*.102,0,.40,.051,.051),(side*.097,-.002,.51,.055,.054),(side*.091,0,.62,.062,.060),(side*.082,0,.75,.071,.067)],4),48,True),'Legwear base '+str(side),'leg');ob['chibi_legwear_base']=True
+        ob=obj(Mesh().loft(anatomy.profile([(side*x,y,z,rx,ry) for x,y,z,rx,ry in anatomy.LEG_PROFILE]).tolist(),48,True),'Legwear base '+str(side),'leg');ob['chibi_legwear_base']=True
     for ob in col.objects:
         if ob.get('chibi_asset','').startswith('Matte tights'):ob['chibi_replaced_legs']=True
     rig['chibi_underbody_v2']=True;rig['chibi_underbody_rev']=REVISION
@@ -376,6 +383,7 @@ def visibility(objects,spec):
             continue
         if slot:
             hidden=(dress and slot in ('top','bottom')) or (not dress and slot=='dress') or (outfit.get(slot)!=ob.get('chibi_option'))
+            if ob.get('chibi_option')=='shorts' and not ob.get('chibi_factory_v2'):hidden=True
             if ob.get('chibi_factory_v2'):
                 hidden=hidden or ob.get('chibi_palette','default')!=palette or ob.get('chibi_recipe_rev')!=REVISION
                 if ob.get('chibi_fit','any')!='any':hidden=hidden or ob['chibi_fit']!=fit

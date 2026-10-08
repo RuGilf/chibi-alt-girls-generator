@@ -213,8 +213,12 @@
     },
     "shorts": {
       "label": "Джинсовые шорты",
-      "builder": "legacy",
-      "surface": "cloth"
+      "builder": "pants",
+      "surface": "denim",
+      "width": 0.077,
+      "length": 0.625,
+      "color": "denim",
+      "accent": "charcoal"
     },
     "longskirt": {
       "label": "Длинная готическая юбка",

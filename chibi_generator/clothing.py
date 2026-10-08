@@ -6,6 +6,8 @@ from math import pi,sin,cos,sqrt
 
 class Mesh:
     def __init__(self):self.v=[];self.f=[]
+    def append(self,other):
+        offset=len(self.v);self.v.extend(other.v);self.f.extend(tuple(offset+i for i in face) for face in other.f);return self
     def loft(self,rings,seg=64,caps=False,power=2):
         offset=len(self.v)
         for x,y,z,rx,ry in rings:
@@ -36,6 +38,15 @@ class Mesh:
         for p in me.polygons:p.use_smooth=smooth
         ob.parent=rig;ob['chibi_asset']=name;ob['chibi_part']=part;ob['chibi_section']='04 Outfit';ob['chibi_slot']=slot;ob['chibi_option']=option
         return ob
+
+def union_surface(ob,voxel=.003,iterations=3):
+    """Bake overlapping closed volumes into a single editable outer surface."""
+    old=bpy.context.view_layer.objects.active;bpy.context.view_layer.objects.active=ob
+    rem=ob.modifiers.new('Joined garment surface','REMESH');rem.mode='VOXEL';rem.voxel_size=voxel;rem.use_smooth_shade=True
+    bpy.ops.object.modifier_apply(modifier=rem.name)
+    sm=ob.modifiers.new('Soft sewn transition','SMOOTH');sm.factor=.55;sm.iterations=iterations
+    bpy.ops.object.modifier_apply(modifier=sm.name);bpy.context.view_layer.objects.active=old
+    for p in ob.data.polygons:p.use_smooth=True
 
 def interpolate(profile,steps=4):
     rings=[]

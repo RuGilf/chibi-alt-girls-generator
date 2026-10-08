@@ -3,7 +3,7 @@ import json, math, uuid
 from pathlib import Path
 import bpy,numpy as np
 from mathutils import Vector,Matrix
-from . import model,facial,clothing,wardrobe,hair,appearance,hands,posing,surfaces
+from . import model,facial,clothing,wardrobe,hair,appearance,hands,posing,surfaces,anatomy
 from .deformation import deform
 ASSET=Path(__file__).resolve().parent/'assets/chibi_base.blend'
 SECTIONS=('01 Body','02 Face','03 Hair','04 Outfit','05 Jewelry')
@@ -81,16 +81,35 @@ def bind(ob,rig,part):
     if part=='head':candidates=['head']
     elif part=='neck':candidates=['neck','head','chest']
     elif part=='leg':candidates=[f'{k}.{side}' for k in ('thigh','shin','foot','toe')]
-    elif part=='skirt':candidates=['pelvis']
+    elif part in ('skirt','hip'):candidates=['pelvis']
     elif part=='arm':
         candidates=[f'{k}.{side}' for k in ('clavicle','upper_arm','forearm','hand')]
         if 'Palm' in ob.name or 'finger' in ob.name or 'Thumb' in ob.name or 'nail' in ob.name:
             candidates+=[f'{f}{j}.{side}' for f in ('index','middle','ring','pinky','thumb') for j in (1,2,3)]
     else:candidates=['pelvis','spine','chest','neck','clavicle.L','clavicle.R']
     ob.vertex_groups.clear()
+    for modifier in list(ob.modifiers):
+        if modifier.type=='ARMATURE':ob.modifiers.remove(modifier)
     for name,_,_,_ in BONES:
         if name!='root':ob.vertex_groups.new(name=name)
-    if len(candidates)==1:ob.vertex_groups[candidates[0]].add(list(range(len(pts))),1,'REPLACE')
+    if part=='arm':
+        for i,weights in enumerate(anatomy.arm_weights(pts)):
+            for name,weight in zip(('clavicle','upper_arm','forearm','hand'),weights):
+                if weight>1e-7:ob.vertex_groups[f'{name}.{side}'].add([i],float(weight),'REPLACE')
+        ob['chibi_arm_binding_rev']=anatomy.REVISION
+    elif part in ('leg','pants'):
+        segments={name:(a,b) for name,a,b,_ in BONES}
+        hip=anatomy.smooth(.68,.81,pts[:,2])
+        for leg_side,mask in [('L',pts[:,0]>=0),('R',pts[:,0]<0)]:
+            indices=np.flatnonzero(mask);names=[f'{k}.{leg_side}' for k in ('thigh','shin','foot','toe')]
+            distances=np.stack([_segment_dist(pts[mask],*segments[n]) for n in names],axis=1)
+            weights=np.exp(-100*(distances-distances.min(axis=1)[:,None]));weights/=weights.sum(axis=1)[:,None]
+            for i,values in zip(indices,weights):
+                for name,value in zip(names,values*(1-hip[i])):
+                    if value>1e-7:ob.vertex_groups[name].add([int(i)],float(value),'REPLACE')
+                if hip[i]>1e-7:ob.vertex_groups['pelvis'].add([int(i)],float(hip[i]),'REPLACE')
+        ob['chibi_leg_binding_rev']=anatomy.REVISION
+    elif len(candidates)==1:ob.vertex_groups[candidates[0]].add(list(range(len(pts))),1,'REPLACE')
     else:
         segments={name:(a,b) for name,a,b,_ in BONES}
         distances=np.stack([_segment_dist(pts,*segments[n]) for n in candidates],axis=1)
@@ -167,7 +186,9 @@ class Character:
         for ob in wardrobe.ensure(self.collection,self.rig,spec):
             ob.shape_key_add(name='Basis');ob.shape_key_add(name='BodyVariation');bind(ob,self.rig,ob['chibi_part'])
         for ob in self.objects:
-            if ob.get('chibi_asset','').startswith('Underlying arm'):hands.bind_wrist(ob,rest_points(ob))
+            if ob.type=='MESH' and ob.get('chibi_part')=='arm' and not ob.get('chibi_hand') and ob.get('chibi_arm_binding_rev')!=anatomy.REVISION:bind(ob,self.rig,'arm')
+            if ob.type=='MESH' and ob.get('chibi_part') in ('leg','pants','hip') and ob.get('chibi_leg_binding_rev')!=anatomy.REVISION:
+                bind(ob,self.rig,ob['chibi_part']);ob['chibi_leg_binding_rev']=anatomy.REVISION
         for ob in hair.ensure(self.collection,self.rig,spec):
             ob.shape_key_add(name='Basis');ob.shape_key_add(name='BodyVariation');bind(ob,self.rig,'head')
         wardrobe.visibility(self.objects,spec);hair.visibility(self.objects,spec);hands.visibility(self.objects);facial.visibility(self.objects,spec);wardrobe.legwear(self.objects,self.rig,spec['outfit']['legwear']);appearance.apply_materials(self.objects,self.rig,spec)

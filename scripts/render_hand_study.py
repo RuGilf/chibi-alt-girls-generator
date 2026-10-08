@@ -19,10 +19,13 @@ def main():
         hand=next(o for o in c.objects if o.get('chibi_hand')=='L' and not o.get('chibi_digit') and not o.hide_render)
         for ob in c.objects:
             keep=ob.get('chibi_hand')=='L' and ob.get('chibi_hand_rev')==hand['chibi_hand_rev']
-            keep=keep or ob.get('chibi_asset')=='Underlying arm 1'
+            keep=keep or (not hand.get('chibi_continuous_arm') and ob.get('chibi_asset')=='Underlying arm 1')
             ob.hide_render=not keep
         bpy.context.view_layer.update();ev=hand.evaluated_get(bpy.context.evaluated_depsgraph_get())
         mesh=ev.to_mesh();points=np.array([tuple(ev.matrix_world@v.co) for v in mesh.vertices]);ev.to_mesh_clear()
+        if hand.get('chibi_continuous_arm'):
+            wrist=hand.matrix_world@c.rig.pose.bones['hand.L'].head
+            points=points[points[:,2]<wrist.z+.020]
         center=Vector((points.min(axis=0)+points.max(axis=0))*.5)
         offset=Vector((-.8,3,.9) if back else (.5,-3,.8));camera.location=center+offset
         camera.rotation_euler=(center-camera.location).to_track_quat('-Z','Y').to_euler();camera.data.type='ORTHO';camera.data.ortho_scale=.215
